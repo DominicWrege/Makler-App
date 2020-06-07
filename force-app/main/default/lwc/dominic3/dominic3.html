@@ -1,0 +1,20 @@
+<template>
+  <lightning-card
+    class="card"
+    title="Accounts mit A am Anfang"
+    icon-name="custom:custom11"
+  >
+    <div class="slds-m-around_medium">
+      <p>Laden</p>
+      <lightning-progress-bar value={progress}> </lightning-progress-bar>
+      <p style="margin-top: 1rem; margin-bottom: 1rem;">
+        Hier ist mal eine Tabelle .....
+      </p>
+      <lightning-datatable
+        key-field="Id"
+        data={accounts}
+        columns={columns}
+      ></lightning-datatable>
+    </div>
+  </lightning-card>
+</template>

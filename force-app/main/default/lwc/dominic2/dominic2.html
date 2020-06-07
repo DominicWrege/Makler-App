@@ -1,0 +1,29 @@
+<template>
+  <lightning-card variant="narrow" icon-name="standard:opportunity">
+    <h1 slot="title">{title}</h1>
+
+    <div class="slds-m-around_medium">
+      <p>{body}</p>
+      <template if:true={janein}>
+        <p>
+          Es ist war.
+        </p>
+      </template>
+      <template if:false={janein}>
+        <p>
+          Es ist falsch.
+        </p>
+      </template>
+    </div>
+    <lightning-button
+      variant="brand"
+      label="Go to Test Objekte"
+      onclick={handleClick}
+      title="Button1"
+      class="slds-m-left_x-small"
+    ></lightning-button>
+    <div slot="footer">
+      <h6>This is the footer</h6>
+    </div>
+  </lightning-card>
+</template>
