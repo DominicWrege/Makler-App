@@ -19,7 +19,7 @@
 			<supportedFormFactors>
 				<supportedFormFactor type="Large" />
 				<supportedFormFactor type="Small" />
-            </supportedFormFactors>
+			</supportedFormFactors>
 		</targetConfig>
 	</targetConfigs>
 </LightningComponentBundle>
