@@ -11,6 +11,9 @@
             ],
             "c/dominic3": [
                 "dominic3/dominic3.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
             ]
         }
     },
