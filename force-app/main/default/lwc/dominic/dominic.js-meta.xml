@@ -5,15 +5,13 @@
 	<masterLabel>Dominic Test</masterLabel>
 	<description>This is a demo component.</description>
 	<targets>
-		<target>lightning__AppPage</target>
 		<target>lightning__RecordPage</target>
-		<target>lightning__HomePage</target>
 	</targets>
 	<targetConfigs>
 		<targetConfig targets="lightning__RecordPage">
 			<property name="prop1" type="String" />
 			<objects>
-				<object>Account</object>
+				<!-- <object>Account</object> -->
 				<object>Test_Objekt__c</object>
 			</objects>
 			<supportedFormFactors>
