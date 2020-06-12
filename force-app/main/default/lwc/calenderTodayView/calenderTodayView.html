@@ -1,0 +1,20 @@
+<template>
+    <lightning-card
+        class="card"
+        title="Todays Events"
+        icon-name="custom:custom14"
+    >
+        <div class="slds-m-around_medium">
+            <template if:true={allEvents}>
+                <template for:each={allEvents} for:item="event">
+                    <div key={event.id} style="margin-bottom: 16px;">
+                        <h2>Titel: {event.Subject}</h2>
+                        <p>Start: {event.LocaleStartDateTime}</p>
+                        <p>End: {event.LocaleEndDateTime}</p>
+                        <p>Ort: {event.Location}</p>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
