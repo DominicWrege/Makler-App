@@ -2,13 +2,15 @@
     <lightning-card
         class="card"
         title="Todays Events"
-        icon-name="custom:custom14"
+        icon-name="standard:lead_list"
     >
         <div class="slds-m-around_medium">
             <template if:true={allEvents}>
                 <template for:each={allEvents} for:item="event">
                     <div key={event.id} style="margin-bottom: 16px;">
-                        <h2>Titel: {event.Subject}</h2>
+                        <div class="slds-text-heading_medium">
+                            Titel: {event.Subject}
+                        </div>
                         <p>Start: {event.LocaleStartDateTime}</p>
                         <p>End: {event.LocaleEndDateTime}</p>
                         <p>Ort: {event.Location}</p>

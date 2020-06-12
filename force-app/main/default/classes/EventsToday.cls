@@ -4,7 +4,7 @@ public with sharing class EventsToday {
 		return [
             Select Id, ActivityDate, StartDateTime, EndDateTime, subject, Location, CreatedById 
             FROM event 
-            WHERE ActivityDate = TODAY
+            WHERE ActivityDate = TODAY AND OwnerId =: UserInfo.getUserID()
 		];
 	}
 }
