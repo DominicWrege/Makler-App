@@ -17,6 +17,9 @@
             ],
             "c/calenderTodayView": [
                 "calenderTodayView/calenderTodayView.js"
+            ],
+            "c/calenderEventItem": [
+                "calenderEventItem/calenderEventItem.js"
             ]
         }
     },

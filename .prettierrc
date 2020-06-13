@@ -10,7 +10,7 @@
       "options": { "parser": "html" }
     },
     {
-      "files": ["*.html", "*.js", ".css", ".xml", ".cls"],
+      "files": ["*.html", "*.js", "*.css", ".xml", ".cls"],
       "options": {
         "tabWidth": 4
       }

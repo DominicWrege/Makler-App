@@ -1,0 +1,19 @@
+.title {
+    color: #76a7cf;
+}
+.item-container {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+}
+
+.grid-left {
+    grid-column: 1;
+}
+.arrow {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    justify-self: right;
+    color: #424242;
+    font-size: 1.4rem;
+    margin-right: 16px;
+}

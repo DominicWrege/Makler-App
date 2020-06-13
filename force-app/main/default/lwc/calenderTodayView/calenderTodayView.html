@@ -1,21 +1,19 @@
 <template>
-    <lightning-card
-        class="card"
-        title="Todays Events"
-        icon-name="standard:lead_list"
-    >
+    <lightning-card class="card" title={title} icon-name="standard:lead_list">
         <div class="slds-m-around_medium">
-            <template if:true={allEvents}>
+            <template if:false={isEmpty}>
                 <template for:each={allEvents} for:item="event">
-                    <div key={event.id} style="margin-bottom: 16px;">
-                        <div class="slds-text-heading_medium">
-                            Titel: {event.Subject}
-                        </div>
-                        <p>Start: {event.LocaleStartDateTime}</p>
-                        <p>End: {event.LocaleEndDateTime}</p>
-                        <p>Ort: {event.Location}</p>
+                    <div class="calender-event-item-container" key={event.Id}>
+                        <c-calender-event-item
+                            item={event}
+                            onselected={navigateToHandler}
+                        >
+                        </c-calender-event-item>
                     </div>
                 </template>
+            </template>
+            <template if:true={isEmpty}>
+                <p class="no-items">Keine Termine vorhanden &#127881;</p>
             </template>
         </div>
     </lightning-card>

@@ -1,0 +1,14 @@
+<template>
+    <div class="item-container" onclick={handleClick}>
+        <div class="slds-text-heading_small title">
+            {item.Subject}
+        </div>
+        <p class="grid-left">Start: {item.LocaleStartDateTime}</p>
+        <p class="grid-left">End: {item.LocaleEndDateTime}</p>
+        <p class="grid-left">Ort: {item.Location}</p>
+        <p class="arrow">
+            &gt;
+            <!-- > -->
+        </p>
+    </div>
+</template>

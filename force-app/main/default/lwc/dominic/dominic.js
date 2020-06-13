@@ -20,7 +20,7 @@ export default class Dominic extends LightningElement {
     changeHandler(event) {
         this.text = event.target.value;
     }
-    showToast(e) {
+    showToast(e, d) {
         console.log("toast?");
         const event = new ShowToastEvent({
             title: "Objekt Created!",
