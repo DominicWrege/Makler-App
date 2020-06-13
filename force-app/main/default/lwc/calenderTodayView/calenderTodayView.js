@@ -10,7 +10,6 @@ export default class CalenderTodayView extends NavigationMixin(
 
     async connectedCallback() {
         let tmpEvents = [];
-        console.log(this.limit);
         for (let event of await getTodayEvents({ max: this.limit })) {
             tmpEvents.push({
                 LocaleStartDateTime: new Date(
@@ -41,7 +40,11 @@ export default class CalenderTodayView extends NavigationMixin(
     }
     @api
     get title() {
-        return `Meine heutigen Termine (${this.limit})`;
+        let lmt = 0;
+        if (!this.isEmpty) {
+            lmt = this.limit;
+        }
+        return `Meine heutigen Termine (${lmt})`;
     }
     @api
     get isEmpty() {
