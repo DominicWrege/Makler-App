@@ -1,0 +1,33 @@
+.bg-gray {
+    background-color: #e8e8e8;
+}
+
+:host {
+    cursor: pointer;
+    height: 100px;
+    width: 50px;
+    margin: 21px 42px 21px 42px;
+    justify-items: center;
+    display: grid;
+}
+
+.item-box {
+    /* background-color: var(--main-bg-color); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+.item-dote {
+    margin: 12px 0 12px 0;
+    height: 10px;
+    width: 10px;
+    border: 1px;
+    border-radius: 50%;
+}
+
+@media (max-width: 500px) {
+    :host {
+        margin: 16 px 24px 24px 24px;
+    }
+}

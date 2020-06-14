@@ -1,0 +1,13 @@
+<template>
+    <div onclick={handleClick} class="item-box bg-gray">
+        <lightning-icon
+            icon-name={item.icon}
+            alternative-text="Connected"
+            size="small"
+            title="large size"
+        >
+        </lightning-icon>
+    </div>
+    <div class="item-dote bg-gray"></div>
+    <p>{item.description}</p>
+</template>

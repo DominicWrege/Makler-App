@@ -1,0 +1,26 @@
+<template>
+    <lightning-card
+        class="card"
+        title="Meine Life Events"
+        icon-name="custom:custom26"
+    >
+        <div class="slds-m-around_medium events">
+            <template for:each={events} for:item="item">
+                <c-life-event-item
+                    key={item.id}
+                    onselected={handleSelection}
+                    item={item}
+                ></c-life-event-item>
+            </template>
+            <!-- <c-life-event-item
+                onselected={handleSelection}
+                description="Work"
+            ></c-life-event-item>
+            <c-life-event-item onselected={handleSelection}></c-life-event-item>
+            <c-life-event-item onselected={handleSelection}></c-life-event-item>
+            <c-life-event-item onselected={handleSelection}></c-life-event-item>
+            <c-life-event-item onselected={handleSelection}></c-life-event-item>
+            <c-life-event-item onselected={handleSelection}></c-life-event-item> -->
+        </div>
+    </lightning-card>
+</template>

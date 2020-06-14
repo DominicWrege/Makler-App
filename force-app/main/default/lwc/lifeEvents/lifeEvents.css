@@ -1,0 +1,12 @@
+.events {
+    display: inline-flex;
+    flex-wrap: wrap;
+    background: white;
+    max-width: 100%;
+    /* overflow-x: scroll; */
+}
+@media (max-width: 500px) {
+    .events {
+        justify-content: space-between;
+    }
+}
