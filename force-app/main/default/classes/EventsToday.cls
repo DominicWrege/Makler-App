@@ -1,5 +1,5 @@
 public with sharing class EventsToday {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static List<Event> getTodayEvents(Integer max) {
 		return [
             Select Id, ActivityDate, StartDateTime, EndDateTime, subject, Location, CreatedById 

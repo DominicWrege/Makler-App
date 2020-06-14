@@ -1,14 +1,22 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, track, wire } from "lwc";
 import getTodayEvents from "@salesforce/apex/EventsToday.getTodayEvents";
 import { NavigationMixin } from "lightning/navigation";
 
 export default class CalenderTodayView extends NavigationMixin(
     LightningElement
 ) {
-    @api allEvents = [];
+    @track allEvents;
     @api limit;
 
+    constructor() {
+        super();
+        this.limit = 0;
+        this.allEvents = [];
+    }
+
     async connectedCallback() {
+        console.log("connected");
+
         let tmpEvents = [];
         for (let event of await getTodayEvents({ max: this.limit })) {
             tmpEvents.push({
@@ -19,6 +27,9 @@ export default class CalenderTodayView extends NavigationMixin(
                 ...event
             });
         }
+
+        getTodayEvents({ max: this.limit }).then((a) => console.log(a));
+
         this.allEvents = tmpEvents;
     }
     navigateToHandler(e) {
@@ -38,15 +49,9 @@ export default class CalenderTodayView extends NavigationMixin(
             console.error(er);
         }
     }
-    @api
     get title() {
-        let lmt = 0;
-        if (!this.isEmpty) {
-            lmt = this.limit;
-        }
-        return `Meine heutigen Termine (${lmt})`;
+        return `Meine heutigen Termine (${this.allEvents.length})`;
     }
-    @api
     get isEmpty() {
         return this.allEvents.length == 0;
     }

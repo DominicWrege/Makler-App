@@ -1,6 +1,6 @@
 public with sharing class TestAccountList {
 
-	@AuraEnabled(cacheable=true)
+	@AuraEnabled(cacheable=false)
 	public static List<Account> getAccountList() {
 		return [
 			SELECT Id, Name, phone, rating, RecordType.name 
