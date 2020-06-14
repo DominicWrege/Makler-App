@@ -43,7 +43,3 @@ sfdx force:lightning:lwc:start
 - https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_started_local_dev_setup
 - https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.data_guidelines
 - https://developer.salesforce.com/docs/component-library/overview/components
-
-```
-
-```
