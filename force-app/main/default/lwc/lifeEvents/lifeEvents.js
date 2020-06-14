@@ -9,7 +9,9 @@ class LifeEvent {
         this.description = description;
         this.type = type;
         this.icon = icon;
-        this.id = Math.floor(Math.random() * 200);
+        this.id = `${this.description} ${
+            Math.floor(Math.random() * 500) + Math.floor(Math.random() * 500)
+        }`;
     }
 }
 
