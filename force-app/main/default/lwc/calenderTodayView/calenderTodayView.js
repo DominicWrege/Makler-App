@@ -27,9 +27,6 @@ export default class CalenderTodayView extends NavigationMixin(
                 ...event
             });
         }
-
-        getTodayEvents({ max: this.limit }).then((a) => console.log(a));
-
         this.allEvents = tmpEvents;
     }
     navigateToHandler(e) {
