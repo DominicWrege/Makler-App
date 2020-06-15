@@ -18,6 +18,7 @@ export default class TaskItem extends LightningElement {
         console.log(this.fixId());
         e.preventDefault();
         this.isClosed = !this.isClosed;
+        // TODO maybe handle this differently
         if (this.isClosed) {
             this.status = "Completed";
         } else {
