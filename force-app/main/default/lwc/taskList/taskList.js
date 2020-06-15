@@ -22,10 +22,13 @@ export default class TaskList extends LightningElement {
     }
 
     handleCheck(event) {
-        const payload = { rid: event.detail.id, status: event.detail.status };
+        this.updateTask({ rid: event.detail.id, status: event.detail.status });
+    }
+
+    updateTask(payload) {
         console.log(payload);
         UpdateTask(payload)
-            .then((d) => console.log("update done!"))
+            .then((x) => console.log("update done!"))
             .catch(console.error);
     }
 }

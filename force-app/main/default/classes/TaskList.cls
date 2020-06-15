@@ -3,17 +3,17 @@ public with sharing class TaskList {
 	@AuraEnabled(cacheable=true)
 	public static List<Task> getTaskList() {
 		return [
-			SELECT Id, Subject, Status, ActivityDate, isClosed from Task 
+			SELECT Id, Subject, Status, ActivityDate, isClosed 
+			FROM Task 
+			WHERE OwnerId =: UserInfo.getUserID()
 		];
 	}
 
 	@AuraEnabled(cacheable=false)
-	public static void UpdateTask(String rid, String status){
+	public static void UpdateTask(ID rid, String status){
 		// Update Status for Id rid.
-		Id newId = Id.valueOf(rid);
-
 		Task taskToUpdate = [ SELECT Status FROM Task 
-							  WHERE Id =: newId  
+							  WHERE Id =: rid  
 							  LIMIT 1 ];
 		
 		taskToUpdate.status = status;
