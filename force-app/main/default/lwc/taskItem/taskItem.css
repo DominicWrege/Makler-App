@@ -1,10 +1,11 @@
-.container{
+.container {
     width: 100%;
     display: flex;
+    align-items: center;
     margin-bottom: 24px;
 }
 
-.task-item-inner{
+.task-item-inner {
     width: 100%;
     margin: 0 0 0 16px;
     justify-content: space-between;
@@ -12,14 +13,10 @@
     grid-template-columns: 1fr 4.8rem;
 }
 
-.task-item-inner-subject{
+.task-item-inner-subject {
     text-align: left;
 }
 
-.task-item-inner-date{
-    text-align: right
-}
-
-.checkbox{
-    margin-bottom: 6px;
+.task-item-inner-date {
+    text-align: right;
 }

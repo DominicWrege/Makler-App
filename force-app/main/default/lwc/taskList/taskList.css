@@ -3,19 +3,16 @@
     grid-template-columns: 50px 1fr auto;
     font-weight: bold;
     font-size: initial;
-   
-    color:#76a7cf;
+    color: #76a7cf;
     margin-bottom: 1rem;
 }
 
-
-.list-header-subject{
+.list-header-subject {
     grid-column: 2;
     text-align: left;
 }
 
-
-.list-header-date{
+.list-header-date {
     grid-column: 3;
     text-align: right;
 }
