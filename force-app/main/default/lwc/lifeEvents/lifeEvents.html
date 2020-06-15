@@ -5,11 +5,13 @@
         icon-name="custom:custom26"
     >
         <div class="slds-m-around_medium events">
-            <template for:each={events} for:item="item">
+            <template iterator:item={events}>
                 <c-life-event-item
-                    key={item.id}
+                    last={item.last}
+                    first={item.first}
+                    key={item.value.id}
                     onselected={handleSelection}
-                    item={item}
+                    item={item.value}
                 ></c-life-event-item>
             </template>
             <!-- <c-life-event-item

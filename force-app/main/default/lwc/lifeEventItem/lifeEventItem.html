@@ -8,6 +8,21 @@
         >
         </lightning-icon>
     </div>
-    <div class="item-dote bg-gray"></div>
+    <div class="item-indikator-container">
+        <template if:false={first}>
+            <div class="item-indikator-line"></div>
+        </template>
+        <template if:true={first}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+        <div class="item-dote bg-gray"></div>
+        <template if:false={last}>
+            <div class="item-indikator-line"></div>
+        </template>
+        <template if:true={last}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+    </div>
+
     <p>{item.description}</p>
 </template>
