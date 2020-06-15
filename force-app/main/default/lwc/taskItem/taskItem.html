@@ -22,7 +22,13 @@
         <div class="task-item-inner">
             <p class="task-item-inner-subject">{subject}</p>
             <template if:true={activityDate}>
-                <p class="task-item-inner-date">{activityDate}</p>
+                <lightning-formatted-date-time
+                    class="task-item-inner-date"
+                    year="2-digit"
+                    month="short"
+                    day="2-digit"
+                    value={activityDate}
+                ></lightning-formatted-date-time>
             </template>
             <template if:false={activityDate}>
                 <p class="task-item-inner-date">none</p>
