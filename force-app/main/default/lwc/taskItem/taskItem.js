@@ -8,19 +8,19 @@ export default class TaskItem extends LightningElement {
     @api isClosed;
 
     get isComplete() {
-        return this.status === "Complete";
+        return this.status === "Completed";
     }
     handleCheckItem(e) {
         e.preventDefault();
         this.isClosed = !this.isClosed;
         if (this.isClosed) {
-            this.status = "Complete";
+            this.status = "Completed";
         } else {
             this.status = "Open";
         }
         const selectedEvent = new CustomEvent("checked", {
             detail: {
-                id: this.id.replace(/-12$/, ""),
+                id: this.id.replace(/-[0-9]{1,2}$/, ""),
                 status: this.status
             }
         });

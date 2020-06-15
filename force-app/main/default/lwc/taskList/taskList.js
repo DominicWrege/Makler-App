@@ -23,6 +23,7 @@ export default class TaskList extends LightningElement {
 
     handleCheck(event) {
         const payload = { rid: event.detail.id, status: event.detail.status };
+        console.log(payload);
         UpdateTask(payload)
             .then((d) => console.log("update done!"))
             .catch(console.error);
