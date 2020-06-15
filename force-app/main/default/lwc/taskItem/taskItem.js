@@ -1,24 +1,29 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api } from "lwc";
 
 export default class TaskItem extends LightningElement {
-    @api id
-    @api subject; 
-    @api status; 
-    @api activityDate; 
+    @api id;
+    @api subject;
+    @api status;
+    @api activityDate;
     @api isClosed;
 
-    handleCheckItem(e){
-        e.preventDefault();      
+    get isComplete() {
+        return this.status === "Complete";
+    }
+    handleCheckItem(e) {
+        e.preventDefault();
         this.isClosed = !this.isClosed;
-        const selectedEvent = new CustomEvent("checked", { 
+        if (this.isClosed) {
+            this.status = "Complete";
+        } else {
+            this.status = "Open";
+        }
+        const selectedEvent = new CustomEvent("checked", {
             detail: {
                 id: this.id.replace(/-12$/, ""),
-                status: this.isClosed
+                status: this.status
             }
         });
         this.dispatchEvent(selectedEvent);
     }
-
-    
-
 }

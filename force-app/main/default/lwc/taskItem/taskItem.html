@@ -1,11 +1,22 @@
 <template>
     <div class="container">
-        <template if:true={isClosed}>
-            <lightning-input onclick={handleCheckItem} label=" " class="checkbox" type="checkbox" checked>
+        <template if:true={isComplete}>
+            <lightning-input
+                onclick={handleCheckItem}
+                label=" "
+                class="checkbox"
+                type="checkbox"
+                checked
+            >
             </lightning-input>
         </template>
-        <template if:false={isClosed}>
-            <lightning-input onclick={handleCheckItem} label=" " class="checkbox" type="checkbox"></lightning-input>
+        <template if:false={isComplete}>
+            <lightning-input
+                onclick={handleCheckItem}
+                label=" "
+                class="checkbox"
+                type="checkbox"
+            ></lightning-input>
         </template>
 
         <div class="task-item-inner">

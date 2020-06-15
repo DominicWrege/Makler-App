@@ -2,21 +2,21 @@
     <lightning-card title="Task List" icon-name="doctype:image">
         <div class="slds-m-around_medium">
             <div class="list-header">
-
                 <p class="list-header-subject">Subject</p>
                 <p class="list-header-date">Date</p>
-
             </div>
             <template for:each={tasks} for:item="task">
-                
-                <c-task-item key={task.Id} id={task.Id} subject={task.Subject} status={task.Status} activity-date={task.ActivityDate}
-                    is-closed={task.IsClosed} onchecked={handleCheck}>
+                <c-task-item
+                    key={task.Id}
+                    id={task.Id}
+                    subject={task.Subject}
+                    status={task.Status}
+                    activity-date={task.ActivityDate}
+                    is-closed={task.IsClosed}
+                    onchecked={handleCheck}
+                >
                 </c-task-item>
-           
-
             </template>
         </div>
-
     </lightning-card>
-
 </template>
