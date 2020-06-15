@@ -3,6 +3,12 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/calenderEventItem": [
+                "calenderEventItem/calenderEventItem.js"
+            ],
+            "c/calenderTodayView": [
+                "calenderTodayView/calenderTodayView.js"
+            ],
             "c/dominic": [
                 "dominic/dominic.js"
             ],
@@ -12,23 +18,23 @@
             "c/dominic3": [
                 "dominic3/dominic3.js"
             ],
-            "c/pubsub": [
-                "pubsub/pubsub.js"
-            ],
-            "c/calenderTodayView": [
-                "calenderTodayView/calenderTodayView.js"
-            ],
-            "c/calenderEventItem": [
-                "calenderEventItem/calenderEventItem.js"
+            "c/lifeEventItem": [
+                "lifeEventItem/lifeEventItem.js"
             ],
             "c/lifeEvents": [
                 "lifeEvents/lifeEvents.js"
             ],
-            "c/LifeEvents": [
-                "LifeEvents/LifeEvents.js"
+            "c/pubsub": [
+                "pubsub/pubsub.js"
             ],
-            "c/lifeEventItem": [
-                "lifeEventItem/lifeEventItem.js"
+            "c/charlotte1": [
+                "charlotte1/charlotte1.js"
+            ],
+            "c/taskList": [
+                "taskList/taskList.js"
+            ],
+            "c/taskItem": [
+                "taskItem/taskItem.js"
             ]
         }
     },

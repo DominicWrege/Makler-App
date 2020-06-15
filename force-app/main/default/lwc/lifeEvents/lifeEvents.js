@@ -30,13 +30,13 @@ const allLifeEvents = [
 
 export default class LifeEvents extends NavigationMixin(LightningElement) {
     @api recordId;
+
     events;
     constructor() {
         super();
         this.events = allLifeEvents;
         console.log("form", formFactorName);
     }
-
     handleSelection(event) {
         const eventData = event.detail;
         let pageRef = {
