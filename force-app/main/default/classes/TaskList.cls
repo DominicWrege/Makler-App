@@ -1,6 +1,6 @@
 public with sharing class TaskList {
 
-	@AuraEnabled(cacheable=true)
+	@AuraEnabled(cacheable=false)
 	public static List<Task> getTaskList() {
 		return [
 			SELECT Id, Subject, Status, ActivityDate, isClosed 
