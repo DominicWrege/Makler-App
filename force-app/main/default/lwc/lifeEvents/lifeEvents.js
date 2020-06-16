@@ -1,6 +1,7 @@
 import { LightningElement, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import formFactorName from "@salesforce/client/formFactor";
+import getContactIdForAccount from "@salesforce/apex/LifeEvents.getContactIdForAccount";
 
 import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
 
@@ -30,13 +31,26 @@ const allLifeEvents = [
 
 export default class LifeEvents extends NavigationMixin(LightningElement) {
     @api recordId;
-
+    contactId;
     events;
     constructor() {
         super();
+        this.contactId = "";
         this.events = allLifeEvents;
-        console.log("form", formFactorName);
+        console.log("form 5", formFactorName);
     }
+    connectedCallback() {
+        this.fetchContact();
+    }
+
+    fetchContact() {
+        getContactIdForAccount({ accountID: this.recordId })
+            .then((id) => {
+                this.contactId = id;
+            })
+            .catch(console.error);
+    }
+    // crate new Personal Life event
     handleSelection(event) {
         const eventData = event.detail;
         let pageRef = {
@@ -44,27 +58,27 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
             attributes: {
                 objectApiName: "PersonLifeEvent",
                 actionName: "new"
-                // recordId: this.recordId
             },
             state: {
                 defaultFieldValues: {}
             }
         };
-        //TOD fix recordId pass for account
         const fields = {
             Name: `${eventData.description} Event`,
             EventType: eventData.type,
-            PrimaryPersonId: this.recordId
+            PrimaryPersonId: this.contactId
         };
-        if (formFactorName === "Large") {
-            pageRef.state.defaultFieldValues = encodeDefaultFieldValues({
-                Name: `${event.description} Event`,
-                EventType: eventData.type,
-                PrimaryPersonId: this.recordId
-            });
-        } else {
-            pageRef.state.defaultFieldValues = fields;
+        try {
+            if (formFactorName === "Large") {
+                pageRef.state.defaultFieldValues = encodeDefaultFieldValues(
+                    fields
+                );
+            } else {
+                pageRef.state.defaultFieldValues = fields;
+            }
+            this[NavigationMixin.Navigate](pageRef);
+        } catch (e) {
+            console.error("Navigation", e);
         }
-        this[NavigationMixin.Navigate](pageRef);
     }
 }

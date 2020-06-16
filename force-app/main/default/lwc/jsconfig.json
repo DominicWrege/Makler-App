@@ -35,6 +35,9 @@
             ],
             "c/taskItem": [
                 "taskItem/taskItem.js"
+            ],
+            "c/LifeEvents": [
+                "LifeEvents/LifeEvents.js"
             ]
         }
     },
