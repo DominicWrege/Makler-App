@@ -10,7 +10,9 @@
              
                 <template for:each={tasks} for:item="task">
                     <c-task-item key={task.Id} id={task.Id} subject={task.Subject} status={task.Status}
-                        activity-date={task.ActivityDate} is-closed={task.IsClosed} onchecked={handleCheck}>
+                        activity-date={task.ActivityDate} is-closed={task.IsClosed} onchecked={handleCheck}
+                        onselected={navigateToHandler}
+                        >
                     </c-task-item>
                 </template>
             </template>
