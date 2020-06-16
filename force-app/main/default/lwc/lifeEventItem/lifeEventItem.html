@@ -8,6 +8,7 @@
         >
         </lightning-icon>
     </div>
+    <div class="item-box-triangle"></div>
     <div class="item-indikator-container">
         <template if:false={first}>
             <div class="item-indikator-line"></div>
@@ -23,6 +24,5 @@
             <div class="item-indikator-line hide-item"></div>
         </template>
     </div>
-
-    <p>{item.description}</p>
+    <p class="description">{item.description}</p>
 </template>
