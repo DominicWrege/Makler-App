@@ -16,3 +16,10 @@
     grid-column: 3;
     text-align: right;
 }
+
+
+.no-items {
+    text-align: center;
+    font-size: 1.09rem;
+    
+}

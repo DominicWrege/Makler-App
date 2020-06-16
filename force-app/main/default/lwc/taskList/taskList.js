@@ -1,4 +1,4 @@
-import { LightningElement, wire, api } from "lwc";
+import { LightningElement, wire, api, track } from "lwc";
 
 import getTaskList from "@salesforce/apex/TaskList.getTaskList";
 import UpdateTask from "@salesforce/apex/TaskList.UpdateTask";
@@ -12,7 +12,9 @@ export default class TaskList extends LightningElement {
         this.tasks = [];
     }
 
+
     @wire(getTaskList)
+    
     getTasks(zeug) {
         if (zeug.data) {
             this.tasks = zeug.data; //prop beschreiben
@@ -31,4 +33,12 @@ export default class TaskList extends LightningElement {
             .then((x) => console.log("update done!"))
             .catch(console.error);
     }
+
+
+    get isEmpty() {
+        return this.tasks.length == 0;
+    }
+
+
+
 }
