@@ -1,10 +1,10 @@
 <template>
     <div onclick={handleClick} class="item-box bg-gray">
         <lightning-icon
-            icon-name={item.icon}
+            icon-name={item.Icon__c}
             alternative-text="Connected"
             size="medium"
-            title={item.description}
+            title={item.Name}
         >
         </lightning-icon>
     </div>
@@ -24,5 +24,5 @@
             <div class="item-indikator-line hide-item"></div>
         </template>
     </div>
-    <p class="description">{item.description}</p>
+    <p class="description">{item.Name}</p>
 </template>

@@ -2,45 +2,36 @@ import { LightningElement, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import formFactorName from "@salesforce/client/formFactor";
 import getContactIdForAccount from "@salesforce/apex/LifeEvents.getContactIdForAccount";
+import getLifeEventsTemplates from "@salesforce/apex/LifeEvents.getLifeEventsTemplates";
 
 import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
 
-class LifeEvent {
-    constructor(description, type, icon) {
-        this.description = description;
-        this.type = type;
-        this.icon = icon;
-        this.id = `${this.description} ${
-            Math.floor(Math.random() * 500) + Math.floor(Math.random() * 500)
-        }`;
-    }
-}
-
-const allLifeEvents = [
-    new LifeEvent("Geburt", "Birth", "custom:custom1"),
-    new LifeEvent("Schule..", "Graduation", "custom:custom16"),
-    new LifeEvent("Job", "Job", "custom:custom84"),
-    new LifeEvent("Item", "Job", "utility:connected_apps"),
-    new LifeEvent("Item1", "Job", "utility:connected_apps"),
-    new LifeEvent("Item2", "Job", "utility:connected_apps"),
-    new LifeEvent("Item3", "Job", "utility:connected_apps"),
-    new LifeEvent("Item4", "Job", "utility:connected_apps"),
-    new LifeEvent("Item5", "Job", "utility:connected_apps"),
-    new LifeEvent("Item6", "Job", "utility:connected_apps")
-];
-
+// class LifeEvent {
+//     constructor(description, type, icon) {
+//         this.description = description;
+//         this.type = type;
+//         this.icon = icon;
+//  }
 export default class LifeEvents extends NavigationMixin(LightningElement) {
     @api recordId;
     contactId;
     events;
+
     constructor() {
         super();
         this.contactId = "";
-        this.events = allLifeEvents;
-        console.log("form 5", formFactorName);
+        this.events = [];
+        console.log("form 15", formFactorName);
     }
     connectedCallback() {
+        this.fetchFeventTemplates();
         this.fetchContact();
+    }
+
+    fetchFeventTemplates() {
+        getLifeEventsTemplates()
+            .then((x) => (this.events = x))
+            .catch(console.log);
     }
 
     fetchContact() {
@@ -64,9 +55,10 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
             }
         };
         const fields = {
-            Name: `${eventData.description} Event`,
-            EventType: eventData.type,
-            PrimaryPersonId: this.contactId
+            Name: `${eventData.Name} Event`,
+            EventType: eventData.Event_Type__c,
+            PrimaryPersonId: this.contactId,
+            EventDate: new Date().toISOString()
         };
         try {
             if (formFactorName === "Large") {

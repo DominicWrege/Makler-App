@@ -12,7 +12,7 @@ export default class LifeEventItem extends LightningElement {
     }
 
     handleClick(event) {
-        console.log(this.item.icon);
+        // console.log(this.item.icon);
         event.preventDefault();
         const selectedEvent = new CustomEvent("selected", {
             detail: this.item

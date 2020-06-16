@@ -9,6 +9,9 @@
             "c/calenderTodayView": [
                 "calenderTodayView/calenderTodayView.js"
             ],
+            "c/charlotte1": [
+                "charlotte1/charlotte1.js"
+            ],
             "c/dominic": [
                 "dominic/dominic.js"
             ],
@@ -27,14 +30,11 @@
             "c/pubsub": [
                 "pubsub/pubsub.js"
             ],
-            "c/charlotte1": [
-                "charlotte1/charlotte1.js"
+            "c/taskItem": [
+                "taskItem/taskItem.js"
             ],
             "c/taskList": [
                 "taskList/taskList.js"
-            ],
-            "c/taskItem": [
-                "taskItem/taskItem.js"
             ],
             "c/LifeEvents": [
                 "LifeEvents/LifeEvents.js"
