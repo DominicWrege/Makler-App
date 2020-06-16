@@ -10,7 +10,7 @@ export default class TaskItem extends LightningElement {
     get isComplete() {
         return this.status === "Completed";
     }
-    fixId() { //hahahhahaha 
+    fixId() {
         return this.id.replace(/-[0-9]{0,4}$/, "");
     }
 
@@ -32,8 +32,4 @@ export default class TaskItem extends LightningElement {
         });
         this.dispatchEvent(selectedEvent);
     }
-
-
-
-
 }
