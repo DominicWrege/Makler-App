@@ -40,11 +40,14 @@ export default class TaskItem extends LightningElement {
 
     //click on task 
     handleClick(e) {
+        console.log(this.fixId());
         e.preventDefault();
-        const selectedEvent = new CustomEvent("selected", {
+        const selectedEvent = new CustomEvent("clicked", {
             detail: {
-                id: this.fixId()
-            }
+                id: this.fixId(),
+                status: this.status
+                
+            } 
         });
         this.dispatchEvent(selectedEvent);
     }
