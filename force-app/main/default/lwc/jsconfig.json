@@ -47,6 +47,9 @@
             ],
             "c/account_financialData": [
                 "account_financialData/account_financialData.js"
+            ],
+            "c/account_insuranceData": [
+                "account_insuranceData/account_insuranceData.js"
             ]
         }
     },
