@@ -3,6 +3,18 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/account_BaseData": [
+                "account_BaseData/account_BaseData.js"
+            ],
+            "c/account_familyData": [
+                "account_familyData/account_familyData.js"
+            ],
+            "c/account_financialData": [
+                "account_financialData/account_financialData.js"
+            ],
+            "c/account_insuranceData": [
+                "account_insuranceData/account_insuranceData.js"
+            ],
             "c/calenderEventItem": [
                 "calenderEventItem/calenderEventItem.js"
             ],
@@ -35,24 +47,6 @@
             ],
             "c/taskList": [
                 "taskList/taskList.js"
-            ],
-            "c/Account_BaseData": [
-                "Account_BaseData/Account_BaseData.js"
-            ],
-            "c/account_BaseData": [
-                "account_BaseData/account_BaseData.js"
-            ],
-            "c/account_familyData": [
-                "account_familyData/account_familyData.js"
-            ],
-            "c/account_financialData": [
-                "account_financialData/account_financialData.js"
-            ],
-            "c/account_insuranceData": [
-                "account_insuranceData/account_insuranceData.js"
-            ],
-            "c/LifeEvents": [
-                "LifeEvents/LifeEvents.js"
             ]
         }
     },
