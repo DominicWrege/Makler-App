@@ -2,8 +2,11 @@ import { LightningElement, wire, api, track } from "lwc";
 
 import getTaskList from "@salesforce/apex/TaskList.getTaskList";
 import UpdateTask from "@salesforce/apex/TaskList.UpdateTask";
+import { NavigationMixin } from "lightning/navigation";
 
-export default class TaskList extends LightningElement {
+export default class TaskList extends NavigationMixin( 
+    LightningElement
+ ) {
     tasks; //property
     @api IconName;
 
@@ -39,6 +42,43 @@ export default class TaskList extends LightningElement {
         return this.tasks.length == 0;
     }
 
+  
+
+
+    //button 
+    handleButtonClick(event) {
+        console.log(event);
+        event.preventDefault();
+        event.stopPropagation();
+        this[NavigationMixin.Navigate]({
+            type: "standard__objectPage",
+            attributes: {
+                objectApiName: "Task", 
+                actionName: "home"
+            }
+        });
 
 
 }
+navigateToHandler(e){
+    const rid = e.detail; 
+    e.event.preventDefault();
+    e.event.stopPropagation();
+    try{
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: rid, 
+                objectApiName: "Task",
+                actionName: "view"
+            }
+        }); 
+    }catch(er){
+    console.error(er); 
+    }
+} 
+
+
+
+
+ }

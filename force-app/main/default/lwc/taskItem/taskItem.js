@@ -6,14 +6,17 @@ export default class TaskItem extends LightningElement {
     @api status;
     @api activityDate;
     @api isClosed;
+    @api item; 
 
     get isComplete() {
         return this.status === "Completed";
     }
-    fixId() { //hahahhahaha 
+    fixId() {
         return this.id.replace(/-[0-9]{0,4}$/, "");
     }
 
+
+    //Check checkbox 
     handleCheckItem(e) {
         console.log(this.fixId());
         e.preventDefault();
@@ -35,5 +38,17 @@ export default class TaskItem extends LightningElement {
 
 
 
-
+    //click on task 
+    handleClick(e) {
+        console.log(this.fixId());
+        e.preventDefault();
+        const selectedEvent = new CustomEvent("clicked", {
+            detail: {
+                id: this.fixId()
+                
+            } 
+        });
+        this.dispatchEvent(selectedEvent);
+    }
 }
+

@@ -23,3 +23,7 @@
     font-size: 1.09rem;
     
 }
+.task-event-item-container {
+    margin-bottom: 16px;
+    cursor: pointer;
+}

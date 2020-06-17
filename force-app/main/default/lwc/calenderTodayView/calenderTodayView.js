@@ -52,4 +52,25 @@ export default class CalenderTodayView extends NavigationMixin(
     get isEmpty() {
         return this.allEvents.length == 0;
     }
+
+      //button 
+      handleButtonClick(event) {
+        console.log(event);
+        event.preventDefault();
+        event.stopPropagation();
+        this[NavigationMixin.Navigate]({
+            type: "standard__objectPage",
+            attributes: {
+                objectApiName: "Event", 
+                actionName: "home"
+            }
+        });
+
+
+}
+
+
+
+
+
 }
