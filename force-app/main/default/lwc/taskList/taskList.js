@@ -61,7 +61,7 @@ export default class TaskList extends NavigationMixin(
 
 }
 navigateToHandler(e){
-    const rid = e.detail.Id; 
+    const rid = e.detail; 
     e.event.preventDefault();
     e.event.stopPropagation();
     try{
