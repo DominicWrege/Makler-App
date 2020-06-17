@@ -41,6 +41,9 @@
             ],
             "c/account_BaseData": [
                 "account_BaseData/account_BaseData.js"
+            ],
+            "c/account_familyData": [
+                "account_familyData/account_familyData.js"
             ]
         }
     },
