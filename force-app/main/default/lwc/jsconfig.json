@@ -44,6 +44,9 @@
             ],
             "c/account_familyData": [
                 "account_familyData/account_familyData.js"
+            ],
+            "c/account_financialData": [
+                "account_financialData/account_financialData.js"
             ]
         }
     },
