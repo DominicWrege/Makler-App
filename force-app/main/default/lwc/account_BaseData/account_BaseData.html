@@ -1,23 +1,22 @@
-
 <template>
-     <lightning-card title="Task List">
-        <div class="slds-m-around_medium">
+    <lightning-card title="Persönliche Daten">
 
-            <div class="baseData-header">
-                <p class="baseData-header-subject">Name</p>
-                <p class="baseData-header-subject">Adresse</p>
-                <p class="baseData-header-subject">Telefon</p>
-                <p class="baseData-header-subject">E-Mail</p>
-                <p class="baseData-header-subject">Letzter Kontakt</p>
-            </div>
-         
-           <!--  <div class="account-event-item-container" key={account.Id}>
-                <c-account-item key={accounts.Id} id={accounts.Id} name={accounts.Name}> 
-                </c-account-item>
-            </div> -->
-          
+    
+    <lightning-record-view-form
+            record-id="0015I000004EgUsQAK"
+            object-api-name="Account">
+        <div class="slds-box">
+            <lightning-output-field field-name="Name">
+            </lightning-output-field>
+            <lightning-output-field field-name="Phone">
+            </lightning-output-field>
+            <lightning-output-field field-name="FinServ__MailingAddress__pc">
+            </lightning-output-field>
+            <lightning-output-field field-name="PersonEmail">
+            </lightning-output-field>
+            <lightning-output-field field-name="PersonLastCURequestDate">
+            </lightning-output-field>
         </div>
-    </lightning-card>
-
-
-</template>  
+    </lightning-record-view-form>
+</lightning-card>
+</template>

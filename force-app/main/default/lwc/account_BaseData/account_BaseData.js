@@ -4,7 +4,7 @@ import getBaseData from "@salesforce/apex/Account_BaseData.getBaseData"
 
 export default class Account_BaseData extends LightningElement {
  
-   
+ /*   
      constructor() {
         super(); 
     }
@@ -17,7 +17,7 @@ export default class Account_BaseData extends LightningElement {
             console.error(dat.error); 
         }
 
-    }
+    } */
  
 
 }
