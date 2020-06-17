@@ -70,18 +70,26 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
     handleNewEvent(event) {
         event.preventDefault();
         event.stopPropagation();
-        this[NavigationMixin.Navigate]({
-            type: "standard__objectPage",
-            attributes: {
-                objectApiName: "PersonLifeEvent",
-                actionName: "new"
-            }
-        });
+        const fields = {
+            Name: "Neues Event",
+            PrimaryPersonId: this.contactId
+        };
+        this.showNewLifeEventPage(fields);
     }
 
     // crate new Personal Life event
     handleSelection(event) {
         const eventData = event.detail;
+        const fields = {
+            Name: `${eventData.name} Event`,
+            EventType: eventData.type,
+            PrimaryPersonId: this.contactId,
+            EventDate: new Date().toISOString()
+        };
+        this.showNewLifeEventPage(fields);
+    }
+
+    showNewLifeEventPage(fields) {
         let pageRef = {
             type: "standard__objectPage",
             attributes: {
@@ -91,12 +99,6 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
             state: {
                 defaultFieldValues: {}
             }
-        };
-        const fields = {
-            Name: `${eventData.name} Event`,
-            EventType: eventData.type,
-            PrimaryPersonId: this.contactId,
-            EventDate: new Date().toISOString()
         };
         try {
             if (formFactorName === "Large") {
@@ -108,7 +110,7 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
             }
             this[NavigationMixin.Navigate](pageRef);
         } catch (e) {
-            console.error("Navigation", e);
+            console.error("Eroro while Navigation", e);
         }
     }
 }

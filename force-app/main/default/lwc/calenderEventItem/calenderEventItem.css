@@ -9,6 +9,10 @@
 .grid-left {
     grid-column: 1;
 }
+
+lightning-formatted-date-time {
+    margin-left: 6px;
+}
 .arrow {
     grid-column: 2;
     grid-row: 2 / span 2;

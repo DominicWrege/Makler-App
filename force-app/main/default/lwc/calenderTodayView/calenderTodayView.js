@@ -15,19 +15,19 @@ export default class CalenderTodayView extends NavigationMixin(
     }
 
     async connectedCallback() {
-        console.log("connected");
-
-        let tmpEvents = [];
-        for (let event of await getTodayEvents({ max: this.limit })) {
-            tmpEvents.push({
-                LocaleStartDateTime: new Date(
-                    event.StartDateTime
-                ).toLocaleString(),
-                LocaleEndDateTime: new Date(event.EndDateTime).toLocaleString(),
-                ...event
-            });
+        try {
+            let tmpEvents = [];
+            for (let event of await getTodayEvents({ max: this.limit })) {
+                tmpEvents.push({
+                    LocaleStartDateTime: new Date(event.StartDateTime),
+                    LocaleEndDateTime: new Date(event.EndDateTime),
+                    ...event
+                });
+            }
+            this.allEvents = tmpEvents;
+        } catch (err) {
+            console.error("getTodayEvents", err);
         }
-        this.allEvents = tmpEvents;
     }
     navigateToHandler(e) {
         const rid = e.detail.Id;
@@ -53,24 +53,17 @@ export default class CalenderTodayView extends NavigationMixin(
         return this.allEvents.length == 0;
     }
 
-      //button 
-      handleButtonClick(event) {
+    //button
+    handleButtonClick(event) {
         console.log(event);
         event.preventDefault();
         event.stopPropagation();
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Event", 
+                objectApiName: "Event",
                 actionName: "home"
             }
         });
-
-
-}
-
-
-
-
-
+    }
 }

@@ -47,6 +47,9 @@
             ],
             "c/taskList": [
                 "taskList/taskList.js"
+            ],
+            "c/LifeEvents": [
+                "LifeEvents/LifeEvents.js"
             ]
         }
     },
