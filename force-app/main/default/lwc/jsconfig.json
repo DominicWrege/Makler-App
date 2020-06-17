@@ -35,6 +35,9 @@
             ],
             "c/taskList": [
                 "taskList/taskList.js"
+            ],
+            "c/account_BaseData": [
+                "account_BaseData/account_BaseData.js"
             ]
         }
     },
