@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 
 import getBaseData from "@salesforce/apex/Account_BaseData.getBaseData"
 

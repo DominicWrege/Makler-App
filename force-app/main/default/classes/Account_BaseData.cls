@@ -4,7 +4,7 @@ public with sharing class Account_BaseData {
               return [
                   SELECT Id, Name, Phone, FinServ__MailingAddress__pc,PersonEmail, PersonLastCURequestDate 
                   From Account where recordtype.name = 'Household'
-                  Limit :max
+                 Limit: max 
              
               ];
         }
