@@ -7,35 +7,36 @@
         <lightning-button
             slot="actions"
             variant="neutral"
-            label="tuwas"
-            title="titleName"
-            style="margin-right: 8px;"
-        ></lightning-button>
-        <lightning-button
-            slot="actions"
-            variant="neutral"
-            label="tuwas2"
-            title="titleName"
+            label="Neues Event"
+            title="Neues Event"
+            onclick={handleNewEvent}
         ></lightning-button>
         <div class="slds-m-around_medium events">
-            <template iterator:item={events}>
+            <!-- Acctive -->
+            <template iterator:item={accountLifeEvents}>
                 <c-life-event-item
-                    last={item.last}
-                    first={item.first}
+                    show-left-bar={item.first}
                     key={item.value.id}
+                    active="true"
+                    date={item.value.EventDate}
                     onselected={handleSelection}
-                    item={item.value}
+                    label={item.value.Name}
+                    type={item.value.EventType}
+                    icon={item.value.Icon}
                 ></c-life-event-item>
             </template>
-            <!-- <c-life-event-item
-                onselected={handleSelection}
-                description="Work"
-            ></c-life-event-item>
-            <c-life-event-item onselected={handleSelection}></c-life-event-item>
-            <c-life-event-item onselected={handleSelection}></c-life-event-item>
-            <c-life-event-item onselected={handleSelection}></c-life-event-item>
-            <c-life-event-item onselected={handleSelection}></c-life-event-item>
-            <c-life-event-item onselected={handleSelection}></c-life-event-item> -->
+            <!-- Acctive -->
+            <!-- Available -->
+            <template iterator:item={templates}>
+                <c-life-event-item
+                    show-right-bar={item.last}
+                    key={item.value.id}
+                    onselected={handleSelection}
+                    label={item.value.Name}
+                    type={item.value.EventType}
+                    icon={item.value.Icon__c}
+                ></c-life-event-item>
+            </template>
         </div>
     </lightning-card>
 </template>

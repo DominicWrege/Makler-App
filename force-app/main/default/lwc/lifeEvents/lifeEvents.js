@@ -1,46 +1,86 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, track } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import formFactorName from "@salesforce/client/formFactor";
 import getContactIdForAccount from "@salesforce/apex/LifeEvents.getContactIdForAccount";
 import getLifeEventsTemplates from "@salesforce/apex/LifeEvents.getLifeEventsTemplates";
+import getLifeEventsForContact from "@salesforce/apex/LifeEvents.getLifeEventsForContact";
 
 import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
 
-// class LifeEvent {
-//     constructor(description, type, icon) {
-//         this.description = description;
-//         this.type = type;
-//         this.icon = icon;
-//  }
 export default class LifeEvents extends NavigationMixin(LightningElement) {
     @api recordId;
     contactId;
-    events;
-
+    templates;
+    accountLifeEvents;
     constructor() {
         super();
         this.contactId = "";
-        this.events = [];
-        console.log("form 15", formFactorName);
+        this.templates = [];
+        this.accountLifeEvents = [];
+        console.log("form 36", formFactorName);
     }
-    connectedCallback() {
-        this.fetchFeventTemplates();
-        this.fetchContact();
+    async connectedCallback() {
+        try {
+            this.contactId = await getContactIdForAccount({
+                accountID: this.recordId
+            });
+            const tmpTemplates = await getLifeEventsTemplates();
+            const icons = this.mapIconsToEventType(tmpTemplates);
+            const aEvents = await getLifeEventsForContact({
+                contactID: this.contactId
+            });
+            this.setIconForLifeEvents(icons, aEvents);
+            this.accountLifeEvents = aEvents;
+            this.templates = this.filterActiveEvents(
+                tmpTemplates,
+                this.accountLifeEvents
+            );
+        } catch (err) {
+            console.error("error fetching ...", err);
+        }
     }
 
-    fetchFeventTemplates() {
-        getLifeEventsTemplates()
-            .then((x) => (this.events = x))
-            .catch(console.log);
+    setIconForLifeEvents(icons, accountLifeEvents) {
+        for (let e of accountLifeEvents) {
+            e.Icon = icons.get(e.EventType);
+        }
+    }
+    filterActiveEvents(templateEvents, accountLifeEvents) {
+        const newTemplates = [];
+        for (let te of templateEvents) {
+            const found = accountLifeEvents.find((item) => {
+                return item.EventType === te.Event_Type__c;
+            });
+            if (!found) {
+                newTemplates.push(te);
+            }
+        }
+        return newTemplates;
     }
 
-    fetchContact() {
-        getContactIdForAccount({ accountID: this.recordId })
-            .then((id) => {
-                this.contactId = id;
-            })
-            .catch(console.error);
+    mapIconsToEventType(templates) {
+        let iconsMap = new Map();
+        if (templates) {
+            for (let e of templates) {
+                iconsMap.set(e.Event_Type__c, e.Icon__c);
+            }
+        }
+        console.log(iconsMap);
+        return iconsMap;
     }
+
+    handleNewEvent(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this[NavigationMixin.Navigate]({
+            type: "standard__objectPage",
+            attributes: {
+                objectApiName: "PersonLifeEvent",
+                actionName: "new"
+            }
+        });
+    }
+
     // crate new Personal Life event
     handleSelection(event) {
         const eventData = event.detail;
@@ -55,8 +95,8 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
             }
         };
         const fields = {
-            Name: `${eventData.Name} Event`,
-            EventType: eventData.Event_Type__c,
+            Name: `${eventData.name} Event`,
+            EventType: eventData.type,
             PrimaryPersonId: this.contactId,
             EventDate: new Date().toISOString()
         };

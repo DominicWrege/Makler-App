@@ -5,8 +5,9 @@
     max-width: 100%;
     /* overflow-x: scroll; */
 }
-@media (max-width: 500px) {
+@media (max-width: 580px) {
     .events {
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }

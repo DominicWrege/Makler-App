@@ -1,18 +1,17 @@
-.bg-gray {
-    background-color: #e8e8e8;
+.bg-color {
+    background-color: #026dcb;
 }
 
 :host {
     cursor: pointer;
-    height: 100px;
-    width: 50px;
-    margin: 21px 42px 21px 42px;
+    height: auto;
+    width: auto;
+    margin: 0 16px 1rem 16px;
     justify-items: center;
     display: grid;
 }
 
 .item-box {
-    /* background-color: var(--main-bg-color); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +20,7 @@
 .item-box-triangle {
     height: 1px;
     border: 0.5em solid transparent;
-    border-top-color: #e8e8e8;
+    border-top-color: #026dcb;
 }
 .item-dote {
     margin: 0 4px 0 4px;
@@ -39,7 +38,6 @@
 
 .item-indikator-line {
     height: 0.125rem;
-    background: #e8e8e8;
 }
 .hide-item {
     visibility: hidden;
@@ -47,11 +45,15 @@
 
 .description {
     margin-top: 8px;
+    font-weight: bold;
 }
 
 @media (max-width: 500px) {
     :host {
-        margin: 16px 24px 24px 24px;
+        margin: 6px;
+    }
+    .item-indikator-line {
+        width: 20px;
     }
 }
 

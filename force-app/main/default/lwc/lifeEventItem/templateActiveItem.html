@@ -1,0 +1,35 @@
+<template>
+    <div onclick={handleClick} class="item-box bg-color">
+        <lightning-icon
+            icon-name={icon}
+            alternative-text="Connected"
+            size="medium"
+            title={label}
+            variant="inverse"
+        >
+        </lightning-icon>
+    </div>
+    <div class="item-box-triangle"></div>
+    <div class="item-indikator-container">
+        <template if:false={showLeftBar}>
+            <div class="item-indikator-line bg-color"></div>
+        </template>
+        <template if:true={showLeftBar}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+        <div class="item-dote bg-color"></div>
+        <template if:false={showRightBar}>
+            <div class="item-indikator-line bg-color"></div>
+        </template>
+        <template if:true={showRightBar}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+    </div>
+    <p class="description">{label}</p>
+    <lightning-formatted-date-time
+        month="2-digit"
+        day="2-digit"
+        year="2-digit"
+        value={date}
+    ></lightning-formatted-date-time>
+</template>

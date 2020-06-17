@@ -1,0 +1,30 @@
+<template>
+    <!-- late click handler-->
+    <div class="item-box bg-color">
+        <lightning-icon
+            icon-name={icon}
+            alternative-text="Connected"
+            size="medium"
+            title={label}
+        >
+        </lightning-icon>
+    </div>
+    <div class="item-box-triangle"></div>
+    <div class="item-indikator-container">
+        <template if:false={showLeftBar}>
+            <div class="item-indikator-line bg-color"></div>
+        </template>
+        <template if:true={showLeftBar}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+        <div class="item-dote bg-color"></div>
+        <template if:false={showRightBar}>
+            <div class="item-indikator-line bg-color"></div>
+        </template>
+        <template if:true={showRightBar}>
+            <div class="item-indikator-line hide-item"></div>
+        </template>
+    </div>
+    <p class="description">{label}</p>
+    <p class="hide-item">space</p>
+</template>
