@@ -17,7 +17,6 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
         this.contactId = "";
         this.templates = [];
         this.accountLifeEvents = [];
-        console.log("form 36", formFactorName);
     }
     async connectedCallback() {
         try {
@@ -65,7 +64,6 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
                 iconsMap.set(e.Event_Type__c, e.Icon__c);
             }
         }
-        console.log(iconsMap);
         return iconsMap;
     }
 

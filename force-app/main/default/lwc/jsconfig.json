@@ -50,6 +50,9 @@
             ],
             "c/account_insuranceData": [
                 "account_insuranceData/account_insuranceData.js"
+            ],
+            "c/LifeEvents": [
+                "LifeEvents/LifeEvents.js"
             ]
         }
     },

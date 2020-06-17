@@ -1,9 +1,5 @@
 <template>
-    <lightning-card
-        class="card"
-        title="Meine Life Events"
-        icon-name="custom:custom26"
-    >
+    <lightning-card class="card" title="Life Events" icon-name="standard:event">
         <lightning-button
             slot="actions"
             variant="neutral"
@@ -33,7 +29,7 @@
                     key={item.value.id}
                     onselected={handleSelection}
                     label={item.value.Name}
-                    type={item.value.EventType}
+                    type={item.value.Event_Type__c}
                     icon={item.value.Icon__c}
                 ></c-life-event-item>
             </template>
