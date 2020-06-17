@@ -16,7 +16,8 @@
                     status={task.Status}
                     activity-date={task.ActivityDate} 
                     is-closed={task.IsClosed} 
-                    onchecked={handleCheck} 
+                    onchecked={handleCheck}
+                    onselected={navigateToHandler} 
                     
                     >
                     <!-- onselected={navigateToHandler} -->
@@ -26,8 +27,7 @@
             <template if:true={isEmpty}>
                 <p class="no-items">Keine Aufgaben vorhanden &#127881;</p>
             </template>
-        </div>
-
+            
         <lightning-button 
         variant="neutral" 
         label="Alle Aufgaben" 
@@ -36,6 +36,8 @@
         
         >
     </lightning-button>
+        </div>
+
 
     </lightning-card>
 </template>

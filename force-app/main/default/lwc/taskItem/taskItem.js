@@ -6,6 +6,7 @@ export default class TaskItem extends LightningElement {
     @api status;
     @api activityDate;
     @api isClosed;
+    @api item; 
 
     get isComplete() {
         return this.status === "Completed";
@@ -32,4 +33,13 @@ export default class TaskItem extends LightningElement {
         });
         this.dispatchEvent(selectedEvent);
     }
+
+    handleClick(e) {
+        e.preventDefault();
+        const selectedEvent = new CustomEvent("selected", {
+            detail: this.item
+        });
+        this.dispatchEvent(selectedEvent);
+    }
 }
+

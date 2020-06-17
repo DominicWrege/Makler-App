@@ -42,23 +42,7 @@ export default class TaskList extends NavigationMixin(
         return this.tasks.length == 0;
     }
 
-   /*  navigateToHandler(e){
-        const rid = e.detail.Id; 
-        e.event.preventDefault();
-       // e.event.stopPropagation();
-        try{
-            this[NavigationMixin.Navigate]({
-                type: "standard__recordPage",
-                attributes: {
-                    recordId: rid, 
-                    objectApiName: "Task__c",
-                    actionName: "view"
-                }
-            }); 
-        }catch(er){
-        console.error(er); 
-        }
-    } */
+  
 
 
     //button 
@@ -76,5 +60,25 @@ export default class TaskList extends NavigationMixin(
 
 
 }
+navigateToHandler(e){
+    const rid = e.detail.Id; 
+    e.event.preventDefault();
+    e.event.stopPropagation();
+    try{
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: rid, 
+                objectApiName: "Task",
+                actionName: "view"
+            }
+        }); 
+    }catch(er){
+    console.error(er); 
+    }
+} 
+
+
+
 
  }
