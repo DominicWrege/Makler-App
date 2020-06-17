@@ -46,7 +46,7 @@ export default class TaskList extends NavigationMixin(
 
 
     //button 
-    handleClick(event) {
+    handleButtonClick(event) {
         console.log(event);
         event.preventDefault();
         event.stopPropagation();
@@ -61,7 +61,7 @@ export default class TaskList extends NavigationMixin(
 
 }
 navigateToHandler(e){
-    const rid = e.detail.Id; 
+    const rid = e.detail; 
     e.event.preventDefault();
     e.event.stopPropagation();
     try{

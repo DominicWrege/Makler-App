@@ -15,6 +15,8 @@ export default class TaskItem extends LightningElement {
         return this.id.replace(/-[0-9]{0,4}$/, "");
     }
 
+
+    //Check checkbox 
     handleCheckItem(e) {
         console.log(this.fixId());
         e.preventDefault();
@@ -34,10 +36,15 @@ export default class TaskItem extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
+
+
+    //click on task 
     handleClick(e) {
         e.preventDefault();
         const selectedEvent = new CustomEvent("selected", {
-            detail: this.item
+            detail: {
+                id: this.fixId()
+            }
         });
         this.dispatchEvent(selectedEvent);
     }

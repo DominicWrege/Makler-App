@@ -54,7 +54,7 @@ export default class CalenderTodayView extends NavigationMixin(
     }
 
       //button 
-      handleClick(event) {
+      handleButtonClick(event) {
         console.log(event);
         event.preventDefault();
         event.stopPropagation();

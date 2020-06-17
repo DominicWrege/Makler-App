@@ -9,6 +9,7 @@
                 </div>  
              
                 <template for:each={tasks} for:item="task">
+                    <div class="task-event-item-container" key={task.Id}>
                     <c-task-item 
                     key={task.Id} 
                     id={task.Id} 
@@ -20,8 +21,8 @@
                     onselected={navigateToHandler} 
                     
                     >
-                    <!-- onselected={navigateToHandler} -->
                     </c-task-item>
+                    </div>
                 </template>
             </template>
             <template if:true={isEmpty}>
@@ -32,7 +33,7 @@
         variant="neutral" 
         label="Alle Aufgaben" 
         title="allTasks" 
-        onclick={handleClick}
+        onclick={handleButtonClick}
         
         >
     </lightning-button>
