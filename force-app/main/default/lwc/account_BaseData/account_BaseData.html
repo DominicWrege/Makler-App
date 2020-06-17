@@ -1,12 +1,29 @@
+
 <template>
-    <lightning-card class="card" title={title} icon-name="standard:lead_list">
+    <lightning-card title="Task List">
         <div class="slds-m-around_medium">
-            
 
-
-
+            <div class="baseData-header">
+                <p class="baseData-header-subject">Name</p>
+                <p class="baseData-header-subject">Adresse</p>
+                <p class="baseData-header-subject">Telefon</p>
+                <p class="baseData-header-subject">E-Mail</p>
+                <p class="baseData-header-subject">Letzter Kontakt</p>
+            </div>
+            <template for:each={accounts} for:item="account">
+                <div class="account-event-item-container" key={account.Id}>
+                <c-account-item 
+                key={accounts.Id} 
+                id={accounts.Id} 
+                name={accounts.Name} 
+                
+                >
+                </c-account-item>
+                </div>  
+            </template> 
+           
         </div>
-        </lightning-card>   
-        
-    
-</template>
+    </lightning-card>
+
+
+</template> 

@@ -38,6 +38,9 @@
             ],
             "c/account_BaseData": [
                 "account_BaseData/account_BaseData.js"
+            ],
+            "c/Account_BaseData": [
+                "Account_BaseData/Account_BaseData.js"
             ]
         }
     },
