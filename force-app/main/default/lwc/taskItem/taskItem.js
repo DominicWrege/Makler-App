@@ -19,10 +19,15 @@ export default class TaskItem extends LightningElement {
     handleCheckItem(e) {
         e.preventDefault();
         this.isClosed = !this.isClosed;
-        // TODO maybe handle this differently
+        const textElement = this.template.querySelector(
+            ".task-item-inner-subject"
+        );
+        const className = "crossed-text";
         if (this.isClosed) {
+            textElement.classList.add(className);
             this.status = "Completed";
         } else {
+            textElement.classList.remove(className);
             this.status = "Open";
         }
         const selectedEvent = new CustomEvent("checked", {
