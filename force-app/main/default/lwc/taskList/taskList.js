@@ -1,11 +1,11 @@
-import { LightningElement, wire, api, track } from "lwc";
+import { LightningElement, api, track } from "lwc";
 import getTaskList from "@salesforce/apex/TaskList.getTaskList";
 import UpdateTask from "@salesforce/apex/TaskList.UpdateTask";
 import { NavigationMixin } from "lightning/navigation";
 
 export default class TaskList extends NavigationMixin(LightningElement) {
-    tasks; //property
     @api IconName;
+    @track tasks;
 
     constructor() {
         super();
@@ -14,6 +14,12 @@ export default class TaskList extends NavigationMixin(LightningElement) {
 
     handleCheck(event) {
         this.updateTask({ rid: event.detail.id, status: event.detail.status });
+    }
+
+    connectedCallback() {
+        getTaskList()
+            .then((list) => (this.tasks = list))
+            .catch((e) => console.error("error", e));
     }
 
     updateTask(payload) {
@@ -25,6 +31,11 @@ export default class TaskList extends NavigationMixin(LightningElement) {
 
     get isEmpty() {
         return this.tasks.length == 0;
+    }
+
+    get title() {
+        const t = "Meine Aufgaben";
+        return this.isEmpty ? `${t} (-)` : `${t} (${this.tasks.length})`;
     }
 
     //button
@@ -55,6 +66,20 @@ export default class TaskList extends NavigationMixin(LightningElement) {
             });
         } catch (er) {
             console.error(er);
+        }
+    }
+    handleNewTask() {
+        try {
+            let pageRef = {
+                type: "standard__recordPage",
+                attributes: {
+                    objectApiName: "Task",
+                    actionName: "new"
+                }
+            };
+            this[NavigationMixin.Navigate](pageRef);
+        } catch (err) {
+            console.error("Error while show Life Event ", err);
         }
     }
 }

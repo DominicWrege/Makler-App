@@ -22,7 +22,6 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
         this.accountLifeEvents = [];
     }
     async connectedCallback() {
-        console.log(55);
         this.fetchAllData();
     }
     async fetchAllData() {
