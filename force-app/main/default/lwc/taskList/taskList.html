@@ -6,13 +6,12 @@
             onclick={handleNewTask}
         ></lightning-button>
 
-        <div class="slds-m-around_medium">
+        <div class="slds-m-around_medium card-content">
             <template if:false={isEmpty}>
                 <div class="list-header">
                     <p class="list-header-subject">Titel</p>
                     <p class="list-header-date">Datum</p>
                 </div>
-
                 <template for:each={tasks} for:item="task">
                     <div class="task-event-item-container" key={task.Id}>
                         <c-task-item
