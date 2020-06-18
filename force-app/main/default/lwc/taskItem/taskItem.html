@@ -1,5 +1,5 @@
 <template>
-    <div class="container" onclick={handleClick}>
+    <div class="container">
         <template if:true={isComplete}>
             <lightning-input
                 onclick={handleCheckItem}
@@ -20,7 +20,9 @@
         </template>
 
         <div class="task-item-inner">
-            <p class="task-item-inner-subject">{subject}</p>
+            <p class="task-item-inner-subject" onclick={handleClick}>
+                {subject}
+            </p>
             <template if:true={activityDate}>
                 <lightning-formatted-date-time
                     class="task-item-inner-date"

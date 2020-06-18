@@ -5,7 +5,7 @@ public with sharing class TaskList {
 		return [
 			SELECT Id, Subject, Status, ActivityDate, isClosed 
 			FROM Task 
-			WHERE OwnerId =: UserInfo.getUserID()
+			WHERE OwnerId =: UserInfo.getUserID() And isClosed = FALSE
 		];
 	}
 

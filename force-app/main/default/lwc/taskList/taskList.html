@@ -15,6 +15,7 @@
                 <template for:each={tasks} for:item="task">
                     <div class="task-event-item-container" key={task.Id}>
                         <c-task-item
+                            class="task-item"
                             key={task.Id}
                             id={task.Id}
                             subject={task.Subject}

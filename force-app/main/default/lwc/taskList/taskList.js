@@ -2,6 +2,7 @@ import { LightningElement, api, track } from "lwc";
 import getTaskList from "@salesforce/apex/TaskList.getTaskList";
 import UpdateTask from "@salesforce/apex/TaskList.UpdateTask";
 import { NavigationMixin } from "lightning/navigation";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class TaskList extends NavigationMixin(LightningElement) {
     @api IconName;
@@ -23,10 +24,19 @@ export default class TaskList extends NavigationMixin(LightningElement) {
     }
 
     updateTask(payload) {
-        console.log(payload);
         UpdateTask(payload)
-            .then((x) => console.log("update done!"))
+            .then((x) => {
+                this.showToast();
+            })
             .catch(console.error);
+    }
+
+    showToast() {
+        const event = new ShowToastEvent({
+            title: "Aufgabe wurde aktualisiert",
+            variant: "success"
+        });
+        this.dispatchEvent(event);
     }
 
     get isEmpty() {
@@ -52,18 +62,17 @@ export default class TaskList extends NavigationMixin(LightningElement) {
         });
     }
     navigateToHandler(e) {
-        const rid = e.detail;
-        e.event.preventDefault();
-        e.event.stopPropagation();
+        console.log(e.detail.id);
         try {
-            this[NavigationMixin.Navigate]({
+            let pageRef = {
                 type: "standard__recordPage",
                 attributes: {
-                    recordId: rid,
                     objectApiName: "Task",
-                    actionName: "view"
+                    actionName: "view",
+                    recordId: e.detail.id
                 }
-            });
+            };
+            this[NavigationMixin.Navigate](pageRef);
         } catch (er) {
             console.error(er);
         }
@@ -71,7 +80,7 @@ export default class TaskList extends NavigationMixin(LightningElement) {
     handleNewTask() {
         try {
             let pageRef = {
-                type: "standard__recordPage",
+                type: "standard__objectPage",
                 attributes: {
                     objectApiName: "Task",
                     actionName: "new"
