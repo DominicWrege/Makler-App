@@ -32,13 +32,14 @@
             <template if:true={isEmpty}>
                 <p class="no-items">Keine Aufgaben vorhanden &#127881;</p>
             </template>
-            <lightning-button
-                variant="neutral"
-                label="Alle Aufgaben"
-                title="allTasks"
+        </div>
+        <div slot="footer" class="button-container">
+            <a
+                href="javascript:void(0);"
+                class="link"
                 onclick={handleButtonClick}
+                >Alle Aufgaben</a
             >
-            </lightning-button>
         </div>
     </lightning-card>
 </template>

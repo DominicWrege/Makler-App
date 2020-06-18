@@ -1,4 +1,4 @@
-.container {
+:host {
     width: 100%;
     display: flex;
     align-items: center;
@@ -23,7 +23,4 @@
 
 .crossed-text {
     text-decoration: line-through;
-}
-.task-item-inner-subject:hover {
-    text-decoration: underline;
 }

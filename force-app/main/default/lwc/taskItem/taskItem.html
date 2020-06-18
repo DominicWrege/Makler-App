@@ -1,39 +1,39 @@
 <template>
-    <div class="container">
-        <template if:true={isComplete}>
-            <lightning-input
-                onclick={handleCheckItem}
-                label=" "
-                class="checkbox"
-                type="checkbox"
-                checked
-            >
-            </lightning-input>
+    <template if:true={isComplete}>
+        <lightning-input
+            onclick={handleCheckItem}
+            label=" "
+            class="checkbox"
+            type="checkbox"
+            checked
+        >
+        </lightning-input>
+    </template>
+    <template if:false={isComplete}>
+        <lightning-input
+            onclick={handleCheckItem}
+            label=" "
+            class="checkbox"
+            type="checkbox"
+        ></lightning-input>
+    </template>
+    <div class="task-item-inner">
+        <a
+            href="javascript:void(0);"
+            class="task-item-inner-subject"
+            onclick={handleClick}
+            >{subject}</a
+        >
+        <template if:true={activityDate}>
+            <lightning-formatted-date-time
+                class="task-item-inner-date"
+                month="short"
+                day="2-digit"
+                value={activityDate}
+            ></lightning-formatted-date-time>
         </template>
-        <template if:false={isComplete}>
-            <lightning-input
-                onclick={handleCheckItem}
-                label=" "
-                class="checkbox"
-                type="checkbox"
-            ></lightning-input>
+        <template if:false={activityDate}>
+            <p class="task-item-inner-date">none</p>
         </template>
-
-        <div class="task-item-inner">
-            <p class="task-item-inner-subject" onclick={handleClick}>
-                {subject}
-            </p>
-            <template if:true={activityDate}>
-                <lightning-formatted-date-time
-                    class="task-item-inner-date"
-                    month="short"
-                    day="2-digit"
-                    value={activityDate}
-                ></lightning-formatted-date-time>
-            </template>
-            <template if:false={activityDate}>
-                <p class="task-item-inner-date">none</p>
-            </template>
-        </div>
     </div>
 </template>
