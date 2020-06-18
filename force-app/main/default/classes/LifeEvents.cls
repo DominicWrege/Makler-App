@@ -6,11 +6,10 @@ public with sharing class LifeEvents {
     }
     @AuraEnabled(cacheable=true)
     public static List<PersonLifeEventTemplate__c> getLifeEventsTemplates(){
-        return [Select id, Name, Icon__c, Event_Type__c FROM PersonLifeEventTemplate__c];
+        return [Select id, Name, Icon__c, Event_Type__c FROM PersonLifeEventTemplate__c ORDER BY Position__c];
     }
     @AuraEnabled(cacheable=false)
     public static List<PersonLifeEvent> getLifeEventsForContact(ID contactID){
-        System.debug('iddd', contactID);
         return [SELECT id, Name, eventtype, primaryPersonId, eventdate 
                 FROM PersonLifeEvent 
                 WHERE PrimaryPersonId =: contactID

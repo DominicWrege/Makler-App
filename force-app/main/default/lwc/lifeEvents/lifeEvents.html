@@ -12,13 +12,15 @@
             <template iterator:item={accountLifeEvents}>
                 <c-life-event-item
                     show-left-bar={item.first}
-                    key={item.value.id}
+                    key={item.value.Id}
                     active="true"
+                    event-id={item.value.Id}
                     date={item.value.EventDate}
                     onselected={handleSelection}
                     label={item.value.Name}
                     type={item.value.EventType}
                     icon={item.value.Icon}
+                    onshow={handleShowEvent}
                 ></c-life-event-item>
             </template>
             <!-- Acctive -->
@@ -26,7 +28,7 @@
             <template iterator:item={templates}>
                 <c-life-event-item
                     show-right-bar={item.last}
-                    key={item.value.id}
+                    key={item.value.Id}
                     onselected={handleSelection}
                     label={item.value.Name}
                     type={item.value.Event_Type__c}

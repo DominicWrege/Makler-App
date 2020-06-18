@@ -1,29 +1,15 @@
 import { LightningElement, wire, api, track } from "lwc";
-
 import getTaskList from "@salesforce/apex/TaskList.getTaskList";
 import UpdateTask from "@salesforce/apex/TaskList.UpdateTask";
 import { NavigationMixin } from "lightning/navigation";
 
-export default class TaskList extends NavigationMixin( 
-    LightningElement
- ) {
+export default class TaskList extends NavigationMixin(LightningElement) {
     tasks; //property
     @api IconName;
 
     constructor() {
         super();
         this.tasks = [];
-    }
-
-
-    @wire(getTaskList)
-    
-    getTasks(zeug) {
-        if (zeug.data) {
-            this.tasks = zeug.data; //prop beschreiben
-        } else if (zeug.error) {
-            console.error(zeug.error);
-        }
     }
 
     handleCheck(event) {
@@ -37,15 +23,11 @@ export default class TaskList extends NavigationMixin(
             .catch(console.error);
     }
 
-
     get isEmpty() {
         return this.tasks.length == 0;
     }
 
-  
-
-
-    //button 
+    //button
     handleButtonClick(event) {
         console.log(event);
         event.preventDefault();
@@ -53,32 +35,26 @@ export default class TaskList extends NavigationMixin(
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Task", 
+                objectApiName: "Task",
                 actionName: "home"
             }
         });
-
-
-}
-navigateToHandler(e){
-    const rid = e.detail; 
-    e.event.preventDefault();
-    e.event.stopPropagation();
-    try{
-        this[NavigationMixin.Navigate]({
-            type: "standard__recordPage",
-            attributes: {
-                recordId: rid, 
-                objectApiName: "Task",
-                actionName: "view"
-            }
-        }); 
-    }catch(er){
-    console.error(er); 
     }
-} 
-
-
-
-
- }
+    navigateToHandler(e) {
+        const rid = e.detail;
+        e.event.preventDefault();
+        e.event.stopPropagation();
+        try {
+            this[NavigationMixin.Navigate]({
+                type: "standard__recordPage",
+                attributes: {
+                    recordId: rid,
+                    objectApiName: "Task",
+                    actionName: "view"
+                }
+            });
+        } catch (er) {
+            console.error(er);
+        }
+    }
+}
