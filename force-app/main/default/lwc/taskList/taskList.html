@@ -1,44 +1,45 @@
 <template>
-    <lightning-card title="Task List" icon-name="doctype:image">
-        <div class="slds-m-around_medium">
-           
+    <lightning-card title={title} icon-name="standard:task">
+        <lightning-button
+            label="Neu"
+            slot="actions"
+            onclick={handleNewTask}
+        ></lightning-button>
+
+        <div class="slds-m-around_medium card-content">
             <template if:false={isEmpty}>
                 <div class="list-header">
-                    <p class="list-header-subject">Subject</p>
-                    <p class="list-header-date">Date</p>
-                </div>  
-             
+                    <p class="list-header-subject">Titel</p>
+                    <p class="list-header-date">Datum</p>
+                </div>
                 <template for:each={tasks} for:item="task">
                     <div class="task-event-item-container" key={task.Id}>
-                    <c-task-item 
-                    key={task.Id} 
-                    id={task.Id} 
-                    subject={task.Subject} 
-                    status={task.Status}
-                    activity-date={task.ActivityDate} 
-                    is-closed={task.IsClosed} 
-                    onchecked={handleCheck}
-                    onselected={navigateToHandler} 
-                    
-                    >
-                    </c-task-item>
+                        <c-task-item
+                            class="task-item"
+                            key={task.Id}
+                            id={task.Id}
+                            subject={task.Subject}
+                            status={task.Status}
+                            activity-date={task.ActivityDate}
+                            is-closed={task.IsClosed}
+                            onchecked={handleCheck}
+                            onselected={navigateToHandler}
+                        >
+                        </c-task-item>
                     </div>
                 </template>
             </template>
             <template if:true={isEmpty}>
                 <p class="no-items">Keine Aufgaben vorhanden &#127881;</p>
             </template>
-            
-        <lightning-button 
-        variant="neutral" 
-        label="Alle Aufgaben" 
-        title="allTasks" 
-        onclick={handleButtonClick}
-        
-        >
-    </lightning-button>
         </div>
-
-
+        <div slot="footer" class="button-container">
+            <a
+                href="javascript:void(0);"
+                class="link"
+                onclick={handleButtonClick}
+                >Alle Aufgaben</a
+            >
+        </div>
     </lightning-card>
 </template>

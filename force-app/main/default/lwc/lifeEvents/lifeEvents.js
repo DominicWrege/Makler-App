@@ -1,24 +1,30 @@
-import { LightningElement, api, track } from "lwc";
+import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import formFactorName from "@salesforce/client/formFactor";
 import getContactIdForAccount from "@salesforce/apex/LifeEvents.getContactIdForAccount";
 import getLifeEventsTemplates from "@salesforce/apex/LifeEvents.getLifeEventsTemplates";
 import getLifeEventsForContact from "@salesforce/apex/LifeEvents.getLifeEventsForContact";
-
 import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
 
 export default class LifeEvents extends NavigationMixin(LightningElement) {
     @api recordId;
     contactId;
     templates;
+    poll;
+    interval;
     accountLifeEvents;
     constructor() {
         super();
+        this.interval = 3500;
+        this.poll = false;
         this.contactId = "";
         this.templates = [];
         this.accountLifeEvents = [];
     }
     async connectedCallback() {
+        this.fetchAllData();
+    }
+    async fetchAllData() {
         try {
             this.contactId = await getContactIdForAccount({
                 accountID: this.recordId
@@ -29,7 +35,7 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
                 contactID: this.contactId
             });
             this.setIconForLifeEvents(icons, aEvents);
-            this.accountLifeEvents = aEvents;
+            this.accountLifeEvents = aEvents.slice();
             this.templates = this.filterActiveEvents(
                 tmpTemplates,
                 this.accountLifeEvents
@@ -70,47 +76,77 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
     handleNewEvent(event) {
         event.preventDefault();
         event.stopPropagation();
+        this.pollEverySec(this.interval);
         const fields = {
             Name: "Neues Event",
             PrimaryPersonId: this.contactId
         };
-        this.showNewLifeEventPage(fields);
+        this.showNewLifeEventPage(fields, "new");
+    }
+
+    pollEverySec(sec) {
+        if (!this.poll) {
+            setInterval(async () => {
+                console.log("tick");
+                await this.fetchAllData();
+            }, sec);
+            this.poll = true;
+        }
     }
 
     // crate new Personal Life event
     handleSelection(event) {
+        this.pollEverySec(this.interval);
         const eventData = event.detail;
         const fields = {
-            Name: `${eventData.name} Event`,
+            Name: eventData.name,
             EventType: eventData.type,
             PrimaryPersonId: this.contactId,
             EventDate: new Date().toISOString()
         };
-        this.showNewLifeEventPage(fields);
+        this.showNewLifeEventPage(fields, "new");
     }
-
-    showNewLifeEventPage(fields) {
+    showNewLifeEventPage(fields, actionName) {
         let pageRef = {
             type: "standard__objectPage",
             attributes: {
                 objectApiName: "PersonLifeEvent",
-                actionName: "new"
+                actionName: actionName
             },
             state: {
+                nooverride: 1,
+                useRecordTypeCheck: 1,
                 defaultFieldValues: {}
             }
         };
         try {
-            if (formFactorName === "Large") {
-                pageRef.state.defaultFieldValues = encodeDefaultFieldValues(
-                    fields
-                );
-            } else {
-                pageRef.state.defaultFieldValues = fields;
+            if (fields) {
+                if (formFactorName === "Large") {
+                    pageRef.state.defaultFieldValues = encodeDefaultFieldValues(
+                        fields
+                    );
+                } else {
+                    pageRef.state.defaultFieldValues = fields;
+                }
+                this[NavigationMixin.Navigate](pageRef);
             }
-            this[NavigationMixin.Navigate](pageRef);
         } catch (e) {
-            console.error("Eroro while Navigation", e);
+            console.error("Error while Navigation", e);
+        }
+    }
+    handleShowEvent(event) {
+        try {
+            let pageRef = {
+                type: "standard__recordPage",
+                attributes: {
+                    objectApiName: "PersonLifeEvent",
+                    actionName: "view",
+                    recordId: event.detail.eventId
+                }
+            };
+            this[NavigationMixin.Navigate](pageRef);
+        } catch (err) {
+            console.error("Error while show Life Event ", err);
         }
     }
 }
