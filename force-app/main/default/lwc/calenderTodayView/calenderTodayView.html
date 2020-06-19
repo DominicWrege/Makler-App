@@ -15,13 +15,14 @@
             <template if:true={isEmpty}>
                 <p class="no-items">Keine Termine vorhanden &#127881;</p>
             </template>
-            <lightning-button 
-            variant="neutral" 
-            label="Alle Termine" 
-            title="allEvents" 
-            onclick={handleButtonClick}
+        </div>
+        <div slot="footer" class="button-container">
+            <a
+                href="javascript:void(0);"
+                class="link"
+                onclick={handleButtonClick}
+                >Alle Termine</a
             >
-        </lightning-button>
         </div>
     </lightning-card>
 </template>

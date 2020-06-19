@@ -3,7 +3,7 @@
     grid-template-columns: 50px 1fr auto;
     font-weight: bold;
     font-size: initial;
-    color: #76a7cf;
+    /* color: #76a7cf; */
     padding-top: 0.6rem;
     margin-bottom: 1rem;
 }
