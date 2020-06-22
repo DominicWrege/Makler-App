@@ -1,0 +1,45 @@
+<template>
+    <lightning-card
+        title="Zielerreichung"
+        variant="Narrow"
+        icon-name="standard:sales_cadence_target"
+    >
+        <p class="slds-p-horizontal_small">
+            <lightning-progress-bar
+                value={percentNormalized}
+                size="large"
+            ></lightning-progress-bar>
+        </p>
+        <p slot="footer">
+            <lightning-layout>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={percent}
+                        format-style="percent"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={summedPremiumAmounts}
+                        format-style="currency"
+                        currency-code="EUR"
+                        currency-display-as="symbol"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-text
+                        value="von"
+                    ></lightning-formatted-text>
+                </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={target}
+                        format-style="currency"
+                        currency-code="EUR"
+                        currency-display-as="symbol"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+            </lightning-layout>
+        </p>
+    </lightning-card>
+</template>
