@@ -1,4 +1,4 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, track } from "lwc";
 import templateActiveItem from "./templateActiveItem";
 
 import templateInActiveItem from "./templateInActiveItem";
@@ -10,9 +10,14 @@ export default class LifeEventItem extends LightningElement {
     @api showRightBar;
     @api active;
     @api date;
+    itemBox;
+    @api eventId;
+    @track hover;
 
     constructor() {
         super();
+        this.hover = false;
+        this.eventId = "";
         this.showLeftbar = this.showRightBar = this.active = false;
         this.icon = "utility:connected_apps";
         this.label = "Label";
@@ -31,10 +36,31 @@ export default class LifeEventItem extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
+    handlerOpenEvent(event) {
+        event.preventDefault();
+        const selectedEvent = new CustomEvent("show", {
+            detail: {
+                eventId: this.eventId
+            }
+        });
+        this.dispatchEvent(selectedEvent);
+    }
+
     render() {
         if (this.active) {
             return templateActiveItem;
         }
         return templateInActiveItem;
+    }
+    renderedCallback() {
+        this.itemBox = this.template.querySelector(".item-box");
+    }
+    showNormalIcon(e) {
+        this.itemBox.style.background = "#f4f6fe";
+        this.hover = true;
+    }
+    showPlusIcon(e) {
+        this.itemBox.style.background = "#e8e8e8";
+        this.hover = false;
     }
 }

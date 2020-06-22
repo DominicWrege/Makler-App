@@ -1,8 +1,8 @@
-.container {
+:host {
     width: 100%;
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .task-item-inner {
@@ -19,4 +19,8 @@
 
 .task-item-inner-date {
     text-align: right;
+}
+
+.crossed-text {
+    text-decoration: line-through;
 }

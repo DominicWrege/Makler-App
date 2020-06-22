@@ -1,12 +1,28 @@
 <template>
-    <div onclick={handleClick} class="item-box bg-color">
-        <lightning-icon
-            icon-name={icon}
-            alternative-text="Connected"
-            size="medium"
-            title={label}
-        >
-        </lightning-icon>
+    <div
+        onmouseenter={showNormalIcon}
+        onmouseleave={showPlusIcon}
+        onclick={handleClick}
+        class="item-box bg-color"
+    >
+        <template if:false={hover}>
+            <lightning-icon
+                icon-name={icon}
+                alternative-text="Connected"
+                size="medium"
+                title={label}
+            >
+            </lightning-icon>
+        </template>
+        <template if:true={hover}>
+            <lightning-icon
+                icon-name="utility:add"
+                alternative-text="Connected"
+                size="medium"
+                title="new"
+            >
+            </lightning-icon>
+        </template>
     </div>
     <div class="item-box-triangle"></div>
     <div class="item-indikator-container">

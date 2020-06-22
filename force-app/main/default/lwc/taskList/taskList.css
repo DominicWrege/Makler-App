@@ -3,7 +3,8 @@
     grid-template-columns: 50px 1fr auto;
     font-weight: bold;
     font-size: initial;
-    color: #76a7cf;
+    /* color: #76a7cf; */
+    padding-top: 0.6rem;
     margin-bottom: 1rem;
 }
 
@@ -17,13 +18,15 @@
     text-align: right;
 }
 
-
 .no-items {
     text-align: center;
     font-size: 1.09rem;
-    
 }
 .task-event-item-container {
     margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.task-item {
     cursor: pointer;
 }

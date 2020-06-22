@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     padding: 12px;
+    border-radius: 0.2rem;
 }
 .item-box-triangle {
     height: 1px;
@@ -46,11 +47,12 @@
 .description {
     margin-top: 8px;
     font-weight: bold;
+    text-align: center;
 }
 
 @media (max-width: 580px) {
     :host {
-        margin: 6px;
+        margin: 6px 0px 6px 0px;
     }
     .item-indikator-line {
         width: 20px;
