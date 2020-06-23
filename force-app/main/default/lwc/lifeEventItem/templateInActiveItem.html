@@ -26,17 +26,17 @@
     </div>
     <div class="item-box-triangle"></div>
     <div class="item-indikator-container">
-        <template if:false={showLeftBar}>
+        <template if:false={hideLeftBar}>
             <div class="item-indikator-line bg-color"></div>
         </template>
-        <template if:true={showLeftBar}>
+        <template if:true={hideLeftBar}>
             <div class="item-indikator-line hide-item"></div>
         </template>
         <div class="item-dote bg-color"></div>
-        <template if:false={showRightBar}>
+        <template if:false={hideRightBar}>
             <div class="item-indikator-line bg-color"></div>
         </template>
-        <template if:true={showRightBar}>
+        <template if:true={hideRightBar}>
             <div class="item-indikator-line hide-item"></div>
         </template>
     </div>

@@ -13,16 +13,25 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
     poll;
     interval;
     accountLifeEvents;
+    maxPoll;
+    countPoll;
+    interval;
     constructor() {
         super();
-        this.interval = 3500;
+        this.maxPoll = 12;
+        this.countPoll = 0;
+        this.interval = 3000;
         this.poll = false;
         this.contactId = "";
         this.templates = [];
         this.accountLifeEvents = [];
     }
+
     async connectedCallback() {
         this.fetchAllData();
+    }
+    get accountLifeEventsIsEmpty() {
+        return this.accountLifeEvents.length === 0;
     }
     async fetchAllData() {
         try {
@@ -35,7 +44,7 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
                 contactID: this.contactId
             });
             this.setIconForLifeEvents(icons, aEvents);
-            this.accountLifeEvents = aEvents.slice();
+            this.accountLifeEvents = aEvents;
             this.templates = this.filterActiveEvents(
                 tmpTemplates,
                 this.accountLifeEvents
@@ -86,9 +95,15 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
 
     pollEverySec(sec) {
         if (!this.poll) {
-            setInterval(async () => {
-                console.log("tick");
-                await this.fetchAllData();
+            this.interval = setInterval(async () => {
+                console.log("poll!");
+                if (this.maxPoll < this.countPoll) {
+                    this.countPoll = 0;
+                    clearInterval(this.interval);
+                } else {
+                    this.countPoll += 1;
+                    await this.fetchAllData();
+                }
             }, sec);
             this.poll = true;
         }
@@ -113,7 +128,10 @@ export default class LifeEvents extends NavigationMixin(LightningElement) {
                 objectApiName: "PersonLifeEvent",
                 actionName: actionName
             },
+            // backgroundContext only on Desktop works :/
             state: {
+                navigationLocation: "RELATED_LIST",
+                backgroundContext: `/lightning/r/Account/${this.recordId}/view`,
                 nooverride: 1,
                 useRecordTypeCheck: 1,
                 defaultFieldValues: {}
