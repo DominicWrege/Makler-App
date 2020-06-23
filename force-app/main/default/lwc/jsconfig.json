@@ -47,6 +47,9 @@
             ],
             "c/taskList": [
                 "taskList/taskList.js"
+            ],
+            "c/service_policyData": [
+                "service_policyData/service_policyData.js"
             ]
         }
     },
