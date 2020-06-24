@@ -1,16 +1,31 @@
 <template>
     <label class="label" for="input">{label}</label>
-    <input
-        placeholder={placholder}
-        onchange={handleSelection}
-        onkeypress={handleInput}
-        id="input"
-        name="input"
-        class="slds-input"
+    <!-- onchange={handleSelection} -->
+    <lightning-input
         type="text"
-        required={required}
-    />
-    <datalist id="valueList" class="valueList">
+        variant="standard"
+        name="search"
+        label={label}
+        class="input"
+        onchange={handleInput}
+        onfocus={clearIinput}
+        placeholder={placholder}
+    ></lightning-input>
+    <template if:true={showSuggestions}>
+        <div class="lists">
+            <template for:each={suggestions} for:item="item">
+                <p
+                    class="list-item"
+                    onclick={handleItemClick}
+                    key={item.Id}
+                    id={item.Id}
+                >
+                    {item.Name}
+                </p>
+            </template>
+        </div>
+    </template>
+    <!-- <datalist id="valueList" class="valueList">
         <template for:each={suggestions} for:item="item">
             <option
                 class="option"
@@ -19,5 +34,5 @@
                 value={item.Name}
             ></option>
         </template>
-    </datalist>
+    </datalist> -->
 </template>

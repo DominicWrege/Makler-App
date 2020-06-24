@@ -4,54 +4,44 @@ import searchForAccount from "@salesforce/apex/Searcher.searchForAccount";
 export default class SearchField extends LightningElement {
     initialized = false;
     @track suggestions = [];
+    @track showSuggestions = false;
     @api label = "Search";
     @api placholder = "";
     @api foundValue = "";
     @api foundId = "";
     @api required = false;
-    renderedCallback() {
-        if (this.initialized) {
-            return;
-        }
-        this.initialized = true;
-        let listId = this.template.querySelector("datalist").id;
-        this.template.querySelector("input").setAttribute("list", listId);
-    }
 
-    handleSelection(event) {
-        event.preventDefault();
-        let selectedId = "";
-        for (let i of this.template.querySelectorAll(".valueList > option")) {
-            if (i.value === event.target.value) {
-                selectedId = i.id.replace(/-[0-9]{0,4}$/, "");
-                break;
-            }
-        }
-        const selectedEvent = new CustomEvent("selected", {
-            detail: {
-                id: selectedId
-            }
-        });
-        this.foundId = selectedId;
-        this.foundValue = event.target.value;
-        this.dispatchEvent(selectedEvent);
-    }
     handleInput(event) {
+        this.showSuggestions = true;
         const value = event.target.value;
         this.fetchSuggestionsWithDelay(value);
     }
-    fetchSuggestionsWithDelay(term) {
-        setTimeout(
-            () =>
-                searchForAccount({ term: term })
-                    .then((v) => {
-                        this.suggestions = v;
-                    })
-                    .catch(console.log),
-            300
-        );
+    async fetchSuggestionsWithDelay(term) {
+        try {
+            this.suggestions = await searchForAccount({ term: term });
+            this.loading = false;
+        } catch (err) {
+            console.error(err);
+        }
     }
     debounce(funOnce, delay) {
         setTimeout(funOnce, delay);
+    }
+    handleItemClick(event) {
+        event.preventDefault();
+        this.showSuggestions = false;
+        this.foundId = event.target.id.replace(/-[0-9]{0,4}$/, "");
+        this.foundValue = event.target.textContent;
+        const selectedEvent = new CustomEvent("selected", {
+            detail: {
+                id: this.foundId
+            }
+        });
+        this.template.querySelector("lightning-input").value = this.foundValue;
+        this.dispatchEvent(selectedEvent);
+    }
+    clearIinput() {
+        this.template.querySelector("lightning-input").value = "";
+        this.showSuggestions = false;
     }
 }
