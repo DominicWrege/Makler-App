@@ -4,32 +4,28 @@
             class="slds-m-around_medium card-content"
             style="width: 300px; height: 300px;"
         >
-            <p>Works</p>
+            <label class="label" for="input">{label}</label>
 
             <!-- <lightning-input
                 type="text"
                 label="Enter some text"
             ></lightning-input> -->
             <input
+                onchange={handleSelection}
+                onkeypress={handleInput}
                 id="input"
                 name="input"
-                list="countries"
                 class="slds-input"
                 type="text"
             />
-            <datalist id="countries">
-                <option>Italy</option>
-                <option>Spain</option>
-                <option>France</option>
-                <option>USA</option>
-                <option>England</option>
-                <option>Belgium</option>
-                <option>Brazil</option>
-                <option>Mauritius</option>
-                <option>Colombia</option>
-                <option>Portugal</option>
-                <option>Russia</option>
-                <option>Mauritania</option>
+            <datalist id="valueList" class="valueList">
+                <template for:each={suggestions} for:item="item">
+                    <option
+                        key={item.Id}
+                        id={item.Id}
+                        value={item.Name}
+                    ></option>
+                </template>
             </datalist>
         </div>
     </lightning-card>
