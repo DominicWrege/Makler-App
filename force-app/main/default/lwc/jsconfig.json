@@ -59,6 +59,9 @@
             ],
             "c/hostLookupInLwc": [
                 "hostLookupInLwc/hostLookupInLwc.js"
+            ],
+            "c/searchField": [
+                "searchField/searchField.js"
             ]
         }
     },

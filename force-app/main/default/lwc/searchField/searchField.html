@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title={title} icon-name="standard:search">
+        <div
+            class="slds-m-around_medium card-content"
+            style="width: 300px; height: 300px;"
+        >
+            <p>Works</p>
+
+            <!-- <lightning-input
+                type="text"
+                label="Enter some text"
+            ></lightning-input> -->
+            <input
+                id="input"
+                name="input"
+                list="countries"
+                class="slds-input"
+                type="text"
+            />
+            <datalist id="countries">
+                <option>Italy</option>
+                <option>Spain</option>
+                <option>France</option>
+                <option>USA</option>
+                <option>England</option>
+                <option>Belgium</option>
+                <option>Brazil</option>
+                <option>Mauritius</option>
+                <option>Colombia</option>
+                <option>Portugal</option>
+                <option>Russia</option>
+                <option>Mauritania</option>
+            </datalist>
+        </div>
+    </lightning-card>
+</template>
