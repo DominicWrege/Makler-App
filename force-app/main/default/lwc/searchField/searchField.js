@@ -6,8 +6,9 @@ export default class SearchField extends LightningElement {
     @track suggestions = [];
     @api label = "Search";
     @api placholder = "";
-    @api value = "";
-
+    @api foundValue = "";
+    @api foundId = "";
+    @api required = false;
     renderedCallback() {
         if (this.initialized) {
             return;
@@ -31,7 +32,8 @@ export default class SearchField extends LightningElement {
                 id: selectedId
             }
         });
-        this.value = selectedId;
+        this.foundId = selectedId;
+        this.foundValue = event.target.value;
         this.dispatchEvent(selectedEvent);
     }
     handleInput(event) {
@@ -41,9 +43,11 @@ export default class SearchField extends LightningElement {
     fetchSuggestionsWithDelay(term) {
         setTimeout(
             () =>
-                searchForAccount({ term: term }).then((v) => {
-                    this.suggestions = v;
-                }),
+                searchForAccount({ term: term })
+                    .then((v) => {
+                        this.suggestions = v;
+                    })
+                    .catch(console.log),
             300
         );
     }

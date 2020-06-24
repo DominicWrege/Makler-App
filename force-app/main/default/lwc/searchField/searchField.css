@@ -4,6 +4,7 @@ input {
 :host {
     width: 100%;
 }
+datalist,
 input,
 .option {
     width: 100%;
