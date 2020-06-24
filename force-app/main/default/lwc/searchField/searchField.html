@@ -11,7 +11,12 @@
     />
     <datalist id="valueList" class="valueList">
         <template for:each={suggestions} for:item="item">
-            <option key={item.Id} id={item.Id} value={item.Name}></option>
+            <option
+                class="option"
+                key={item.Id}
+                id={item.Id}
+                value={item.Name}
+            ></option>
         </template>
     </datalist>
 </template>

@@ -4,3 +4,7 @@ input {
 :host {
     width: 100%;
 }
+input,
+.option {
+    width: 100%;
+}
