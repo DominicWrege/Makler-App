@@ -5,6 +5,7 @@ export default class SearchField extends LightningElement {
     initialized = false;
     @track suggestions = [];
     @api label = "Search";
+    @api placholder = "";
 
     renderedCallback() {
         if (this.initialized) {

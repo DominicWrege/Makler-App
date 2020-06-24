@@ -1,32 +1,17 @@
 <template>
-    <lightning-card title={title} icon-name="standard:search">
-        <div
-            class="slds-m-around_medium card-content"
-            style="width: 300px; height: 300px;"
-        >
-            <label class="label" for="input">{label}</label>
-
-            <!-- <lightning-input
-                type="text"
-                label="Enter some text"
-            ></lightning-input> -->
-            <input
-                onchange={handleSelection}
-                onkeypress={handleInput}
-                id="input"
-                name="input"
-                class="slds-input"
-                type="text"
-            />
-            <datalist id="valueList" class="valueList">
-                <template for:each={suggestions} for:item="item">
-                    <option
-                        key={item.Id}
-                        id={item.Id}
-                        value={item.Name}
-                    ></option>
-                </template>
-            </datalist>
-        </div>
-    </lightning-card>
+    <label class="label" for="input">{label}</label>
+    <input
+        placeholder={placholder}
+        onchange={handleSelection}
+        onkeypress={handleInput}
+        id="input"
+        name="input"
+        class="slds-input"
+        type="text"
+    />
+    <datalist id="valueList" class="valueList">
+        <template for:each={suggestions} for:item="item">
+            <option key={item.Id} id={item.Id} value={item.Name}></option>
+        </template>
+    </datalist>
 </template>
