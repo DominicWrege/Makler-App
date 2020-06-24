@@ -6,6 +6,7 @@ export default class SearchField extends LightningElement {
     @track suggestions = [];
     @api label = "Search";
     @api placholder = "";
+    @api value = "";
 
     renderedCallback() {
         if (this.initialized) {
@@ -21,7 +22,7 @@ export default class SearchField extends LightningElement {
         let selectedId = "";
         for (let i of this.template.querySelectorAll(".valueList > option")) {
             if (i.value === event.target.value) {
-                selectedId = i.id;
+                selectedId = i.id.replace(/-[0-9]{0,4}$/, "");
                 break;
             }
         }
@@ -30,7 +31,7 @@ export default class SearchField extends LightningElement {
                 id: selectedId
             }
         });
-        console.log(selectedEvent);
+        this.value = selectedId;
         this.dispatchEvent(selectedEvent);
     }
     handleInput(event) {
