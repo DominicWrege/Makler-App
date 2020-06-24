@@ -16,7 +16,6 @@ export default class Test_recordform extends LightningElement {
    @wire(getRecord, { selectedRecordId: '$recordId', fields: FIELDS })
    getAccount(d){
        if(d.data){
-           console.log("account");
            console.log(d.data);
        }
        if (d.error){
