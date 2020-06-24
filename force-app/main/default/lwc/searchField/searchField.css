@@ -1,12 +1,12 @@
 input {
     margin-top: 0.5rem;
-    padding: 0.35rem 0;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
 }
 :host {
     width: 100%;
 }
-datalist,
-input,
+.valueList .slds-input,
 .option {
     width: 100%;
 }
