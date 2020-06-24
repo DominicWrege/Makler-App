@@ -50,6 +50,15 @@
             ],
             "c/service_policyData": [
                 "service_policyData/service_policyData.js"
+            ],
+            "c/test_recordform": [
+                "test_recordform/test_recordform.js"
+            ],
+            "c/customLookup": [
+                "customLookup/customLookup.js"
+            ],
+            "c/hostLookupInLwc": [
+                "hostLookupInLwc/hostLookupInLwc.js"
             ]
         }
     },
