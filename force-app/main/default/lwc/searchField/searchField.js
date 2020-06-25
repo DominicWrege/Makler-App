@@ -37,11 +37,11 @@ export default class SearchField extends LightningElement {
                 id: this.foundId
             }
         });
-        this.template.querySelector("lightning-input").value = this.foundValue;
+        this.template.querySelector("input").value = this.foundValue;
         this.dispatchEvent(selectedEvent);
     }
     clearIinput() {
-        this.template.querySelector("lightning-input").value = "";
+        this.template.querySelector("input").value = "";
         this.showSuggestions = false;
     }
 }

@@ -1,18 +1,31 @@
 <template>
-    <label class="label" for="input">{label}</label>
     <!-- onchange={handleSelection} -->
-    <lightning-input
-        type="text"
-        variant="standard"
-        name="search"
-        label={label}
-        class="input"
-        onchange={handleInput}
-        onfocus={clearIinput}
-        placeholder={placholder}
-    ></lightning-input>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="text-input-id-1"
+            >{label}</label
+        >
+        <div
+            class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left"
+        >
+            <lightning-icon
+                size="xx-small"
+                class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"
+                icon-name="utility:search"
+                alternative-text="Doc image"
+            ></lightning-icon>
+            <input
+                id="text-input-id-1"
+                type="text"
+                name="search"
+                onkeyup={handleInput}
+                onfocus={clearIinput}
+                placeholder={placholder}
+                class="slds-input input"
+            />
+        </div>
+    </div>
     <template if:true={showSuggestions}>
-        <div class="lists">
+        <div class="list">
             <template for:each={suggestions} for:item="item">
                 <p
                     class="list-item"

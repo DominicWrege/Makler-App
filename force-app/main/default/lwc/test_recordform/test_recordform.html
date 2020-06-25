@@ -102,6 +102,9 @@
                     </lightning-record-view-form>
                 </div>
             </template>
+            <template if:false={selectedRecordId}>
+                <p class="lwc-form">Es wurde kein Eintrag ausgewählt.</p>
+            </template>
         </div>
     </lightning-card>
 </template>
