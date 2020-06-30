@@ -11,7 +11,7 @@
             <!-- Acctive -->
             <template iterator:item={accountLifeEvents}>
                 <c-life-event-item
-                    show-left-bar={item.first}
+                    hide-left-bar={item.first}
                     key={item.value.Id}
                     active="true"
                     event-id={item.value.Id}
@@ -26,14 +26,27 @@
             <!-- Acctive -->
             <!-- Available -->
             <template iterator:item={templates}>
-                <c-life-event-item
-                    show-right-bar={item.last}
-                    key={item.value.Id}
-                    onselected={handleSelection}
-                    label={item.value.Name}
-                    type={item.value.Event_Type__c}
-                    icon={item.value.Icon__c}
-                ></c-life-event-item>
+                <template if:true={accountLifeEventsIsEmpty}>
+                    <c-life-event-item
+                        hide-left-bar={item.first}
+                        hide-right-bar={item.last}
+                        key={item.value.Id}
+                        onselected={handleSelection}
+                        label={item.value.Name}
+                        type={item.value.Event_Type__c}
+                        icon={item.value.Icon__c}
+                    ></c-life-event-item>
+                </template>
+                <template if:false={accountLifeEventsIsEmpty}>
+                    <c-life-event-item
+                        hide-right-bar={item.last}
+                        key={item.value.Id}
+                        onselected={handleSelection}
+                        label={item.value.Name}
+                        type={item.value.Event_Type__c}
+                        icon={item.value.Icon__c}
+                    ></c-life-event-item>
+                </template>
             </template>
         </div>
     </lightning-card>

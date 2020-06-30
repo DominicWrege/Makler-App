@@ -1,0 +1,60 @@
+<template>
+    <!-- onchange={handleSelection} -->
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="text-input-id-1"
+            >{label}</label
+        >
+        <div
+            class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left"
+        >
+            <lightning-icon
+                size="x-small"
+                class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"
+                icon-name="utility:search"
+                alternative-text="Doc image"
+            ></lightning-icon>
+            <input
+                id="text-input-id-1"
+                type="text"
+                name="search"
+                onkeyup={handleInput}
+                onfocus={clearIinput}
+                placeholder={placholder}
+                class="slds-input input"
+                autocomplete="off"
+            />
+        </div>
+    </div>
+    <template if:true={showSuggestions}>
+        <div class="list">
+            <template for:each={suggestions} for:item="item">
+                <div
+                    class="list-item"
+                    onclick={handleItemClick}
+                    key={item.Id}
+                    id={item.Id}
+                >
+                    <lightning-icon
+                        id={item.Id}
+                        size="small"
+                        icon-name="standard:account"
+                        alternative-text="account image"
+                    ></lightning-icon>
+                    <p id={item.Id}>
+                        {item.Name}
+                    </p>
+                </div>
+            </template>
+        </div>
+    </template>
+    <!-- <datalist id="valueList" class="valueList">
+        <template for:each={suggestions} for:item="item">
+            <option
+                class="option"
+                key={item.Id}
+                id={item.Id}
+                value={item.Name}
+            ></option>
+        </template>
+    </datalist> -->
+</template>

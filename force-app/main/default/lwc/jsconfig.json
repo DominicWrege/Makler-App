@@ -52,7 +52,20 @@
                 "service_policyData/service_policyData.js"
             ],
             "c/teamGoals": [
-                "teamGoals/teamGoals.js"
+                "teamGoals/teamGoals.js",
+                "c/test_recordform"
+            ],
+            "c/customLookup": [
+                "customLookup/customLookup.js"
+            ],
+            "c/hostLookupInLwc": [
+                "hostLookupInLwc/hostLookupInLwc.js"
+            ],
+            "c/searchField": [
+                "searchField/searchField.js"
+            ],
+            "c/test_recordform": [
+                "test_recordform/test_recordform.js"
             ]
         }
     },

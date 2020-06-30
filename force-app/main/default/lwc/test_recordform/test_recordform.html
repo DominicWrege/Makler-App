@@ -1,0 +1,103 @@
+<template>
+    <lightning-card class="card">
+        <div class="slds-m-around_medium">
+            <!--             Grundinformationen  -->
+            <!-- <c-search-field field-label="Namen auswählen" child-object-api-name='Opportunity'
+        target-field-api-name='AccountId' required onvalueselected={handleValueSelcted}></c-search-field> -->
+            <c-search-field
+                class="search-field"
+                label="Account Suche"
+                placholder="Name eingeben"
+                onselected={handleValueSelcted}
+            ></c-search-field>
+
+            <template if:true={selectedRecordId}>
+                <div class="lwc-form">
+                    <lightning-record-view-form
+                        record-id={selectedRecordId}
+                        object-api-name="Account"
+                    >
+                        <div class="slds-box">
+                            <lightning-output-field field-name="Name">
+                            </lightning-output-field>
+                            <lightning-output-field field-name="Phone">
+                            </lightning-output-field>
+
+                            <lightning-output-field
+                                field-name="FinServ__MailingAddress__pc"
+                            >
+                            </lightning-output-field>
+
+                            <lightning-output-field field-name="PersonEmail">
+                            </lightning-output-field>
+
+                            <lightning-output-field
+                                field-name="PersonLastCURequestDate"
+                            >
+                            </lightning-output-field>
+
+                            <!-- Familieninformationen -->
+
+                            <lightning-output-field
+                                field-name="FinServ__MaritalStatus__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__NumberOfChildren__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__NextLifeEvent__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__WeddingAnniversary__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__PersonalInterests__c"
+                            >
+                            </lightning-output-field>
+
+                            <!-- finanzinfos -->
+                            <lightning-output-field
+                                field-name="FinServ__CurrentEmployer__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__Occupation__pc"
+                            >
+                            </lightning-output-field>
+                            <lightning-output-field
+                                field-name="FinServ__AnnualIncome__pc"
+                            >
+                            </lightning-output-field>
+                            <!-- verischerungsinfos -->
+                            <!-- Wurden nicht angezeigt -->
+                            <!-- <lightning-output-field
+                                field-name="FinServ__HouseholdPolicies__c"
+                            >
+                            </lightning-output-field> -->
+
+                            <!-- <lightning-output-field
+                                field-name="FinServ__ClaimsOnHouseholdPolicies__c"
+                            >
+                            </lightning-output-field> -->
+                            <!-- <lightning-output-field
+                                field-name="FinServ__InsuranceCustomerSince__c"
+                            >
+                            </lightning-output-field> -->
+                            <!-- <lightning-output-field
+                                field-name="FinServ__TotalInsurancePrimaryOwner__c"
+                            >
+                            </lightning-output-field> -->
+                        </div>
+                    </lightning-record-view-form>
+                </div>
+            </template>
+            <template if:false={selectedRecordId}>
+                <p class="lwc-form">Es wurde kein Eintrag ausgewählt.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

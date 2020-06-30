@@ -6,8 +6,8 @@ export default class LifeEventItem extends LightningElement {
     @api type;
     @api label;
     @api icon;
-    @api showLeftBar;
-    @api showRightBar;
+    @api hideLeftBar;
+    @api hideRightBar;
     @api active;
     @api date;
     itemBox;
@@ -18,7 +18,7 @@ export default class LifeEventItem extends LightningElement {
         super();
         this.hover = false;
         this.eventId = "";
-        this.showLeftbar = this.showRightBar = this.active = false;
+        this.hideLeftbar = this.hideRightBar = this.active = false;
         this.icon = "utility:connected_apps";
         this.label = "Label";
         this.type = "Birth";

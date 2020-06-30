@@ -1,0 +1,30 @@
+.input {
+    margin-top: 0.5rem !important;
+    /* margin-bottom: 0.5rem; */
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.35rem !important;
+}
+:host {
+    width: 100%;
+}
+
+.list {
+    z-index: 3;
+    cursor: pointer;
+    /* margin-top: 1rem; */
+    border: 1px solid lightgrey;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-top-color: transparent;
+}
+.list-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.5rem;
+    padding: 0.6rem;
+    align-items: center;
+}
+
+.list-item:hover {
+    background-color: #efefef;
+}
