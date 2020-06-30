@@ -1,0 +1,56 @@
+<template>
+    <lightning-card
+        title={cardTitle}
+        variant="Narrow"
+        icon-name="standard:sales_cadence_target"
+    >
+        <p class="slds-p-horizontal_small">
+            <lightning-progress-bar
+                value={percentNormalized}
+                size="large"
+            ></lightning-progress-bar>
+        </p>
+        <div class="slds-p-horizontal_small">
+            <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                show-row-number-column
+                row-number-offset={rowOffset}
+                suppress-bottom-bar
+            >
+            </lightning-datatable>
+        </div>
+        <p slot="footer">
+            <lightning-layout>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={percent}
+                        format-style="percent"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={summedPremiumAmounts}
+                        format-style="currency"
+                        currency-code="EUR"
+                        currency-display-as="symbol"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-text
+                        value="von"
+                    ></lightning-formatted-text>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-formatted-number
+                        value={goal}
+                        format-style="currency"
+                        currency-code="EUR"
+                        currency-display-as="symbol"
+                    ></lightning-formatted-number>
+                </lightning-layout-item>
+            </lightning-layout>
+        </p>
+    </lightning-card>
+</template>
