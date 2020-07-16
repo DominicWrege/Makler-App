@@ -52,8 +52,7 @@
                 "service_policyData/service_policyData.js"
             ],
             "c/teamGoals": [
-                "teamGoals/teamGoals.js",
-                "c/test_recordform"
+                "teamGoals/teamGoals.js"
             ],
             "c/customLookup": [
                 "customLookup/customLookup.js"

@@ -45,14 +45,17 @@
 }
 
 .description {
-    margin-top: 8px;
+    margin: 8px 3px 0 3px;
     font-weight: bold;
+    word-break: break-all;
     text-align: center;
+    hyphens: auto;
 }
 
 @media (max-width: 580px) {
     :host {
         margin: 6px 0px 6px 0px;
+        font-size: 0.85em;
     }
     .item-indikator-line {
         width: 20px;
