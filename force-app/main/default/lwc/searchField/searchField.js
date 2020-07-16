@@ -1,5 +1,8 @@
 import { LightningElement, track, api } from "lwc";
 import searchForAccount from "@salesforce/apex/Searcher.searchForAccount";
+import searchServiceResource from "@salesforce/apex/Searcher.searchServiceResource";
+const SEARCHTYPE_ACCOUNT = "Account";
+const SEARCHTYPE_SERVICE = "Service";
 
 export default class SearchField extends LightningElement {
     initialized = false;
@@ -10,6 +13,7 @@ export default class SearchField extends LightningElement {
     @api foundValue = "";
     @api foundId = "";
     @api required = false;
+    @api field = SEARCHTYPE_ACCOUNT;
 
     handleInput(event) {
         this.showSuggestions = true;
@@ -18,7 +22,12 @@ export default class SearchField extends LightningElement {
     }
     async fetchSuggestionsWithDelay(term) {
         try {
-            this.suggestions = await searchForAccount({ term: term });
+            if (this.field === SEARCHTYPE_ACCOUNT) {
+                this.suggestions = await searchForAccount({ term: term });
+            } else if (this.field === SEARCHTYPE_SERVICE) {
+                this.suggestions = await searchServiceResource({ term: term });
+            }
+            console.log(this.suggestions);
             this.loading = false;
         } catch (err) {
             console.error(err);
