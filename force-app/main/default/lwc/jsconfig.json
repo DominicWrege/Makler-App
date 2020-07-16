@@ -1,36 +1,77 @@
 {
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "baseUrl": ".",
-    "paths": {
-      "c/account_BaseData": ["account_BaseData/account_BaseData.js"],
-      "c/account_familyData": ["account_familyData/account_familyData.js"],
-      "c/account_financialData": [
-        "account_financialData/account_financialData.js"
-      ],
-      "c/account_insuranceData": [
-        "account_insuranceData/account_insuranceData.js"
-      ],
-      "c/calenderEventItem": ["calenderEventItem/calenderEventItem.js"],
-      "c/calenderTodayView": ["calenderTodayView/calenderTodayView.js"],
-      "c/charlotte1": ["charlotte1/charlotte1.js"],
-      "c/dominic": ["dominic/dominic.js"],
-      "c/dominic2": ["dominic2/dominic2.js"],
-      "c/dominic3": ["dominic3/dominic3.js"],
-      "c/lifeEventItem": ["lifeEventItem/lifeEventItem.js"],
-      "c/lifeEvents": ["lifeEvents/lifeEvents.js"],
-      "c/pubsub": ["pubsub/pubsub.js"],
-      "c/taskItem": ["taskItem/taskItem.js"],
-      "c/taskList": ["taskList/taskList.js"],
-      "c/service_policyData": ["service_policyData/service_policyData.js"],
-      "c/teamGoals": ["teamGoals/teamGoals.js", "c/test_recordform"],
-      "c/hostLookupInLwc": ["hostLookupInLwc/hostLookupInLwc.js"],
-      "c/searchField": ["searchField/searchField.js"],
-      "c/Kundenbriefing": ["Kundenbriefing/Kundenbriefing.js"]
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/Kundenbriefing": [
+                "Kundenbriefing/Kundenbriefing.js"
+            ],
+            "c/account_BaseData": [
+                "account_BaseData/account_BaseData.js"
+            ],
+            "c/account_familyData": [
+                "account_familyData/account_familyData.js"
+            ],
+            "c/account_financialData": [
+                "account_financialData/account_financialData.js"
+            ],
+            "c/account_insuranceData": [
+                "account_insuranceData/account_insuranceData.js"
+            ],
+            "c/calenderEventItem": [
+                "calenderEventItem/calenderEventItem.js"
+            ],
+            "c/calenderTodayView": [
+                "calenderTodayView/calenderTodayView.js"
+            ],
+            "c/charlotte1": [
+                "charlotte1/charlotte1.js"
+            ],
+            "c/dominic": [
+                "dominic/dominic.js"
+            ],
+            "c/dominic2": [
+                "dominic2/dominic2.js"
+            ],
+            "c/dominic3": [
+                "dominic3/dominic3.js"
+            ],
+            "c/hostLookupInLwc": [
+                "hostLookupInLwc/hostLookupInLwc.js"
+            ],
+            "c/lifeEventItem": [
+                "lifeEventItem/lifeEventItem.js"
+            ],
+            "c/lifeEvents": [
+                "lifeEvents/lifeEvents.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ],
+            "c/searchField": [
+                "searchField/searchField.js"
+            ],
+            "c/service_policyData": [
+                "service_policyData/service_policyData.js"
+            ],
+            "c/taskItem": [
+                "taskItem/taskItem.js"
+            ],
+            "c/taskList": [
+                "taskList/taskList.js"
+            ],
+            "c/teamGoals": [
+                "teamGoals/teamGoals.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
     }
-  },
-  "include": ["**/*", "../../../../.sfdx/typings/lwc/**/*.d.ts"],
-  "typeAcquisition": {
-    "include": ["jest"]
-  }
 }

@@ -27,7 +27,6 @@ export default class SearchField extends LightningElement {
             } else if (this.field === SEARCHTYPE_SERVICE) {
                 this.suggestions = await searchServiceResource({ term: term });
             }
-            console.log(this.suggestions);
             this.loading = false;
         } catch (err) {
             console.error(err);
