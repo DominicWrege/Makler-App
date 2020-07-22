@@ -7,6 +7,10 @@
                 variant="standard"
                 name="name"
                 formatter="currency"
+                onchange={wunschRenteChanged}
+                onclick={clearInput}
+                onfocus={clearInput}
+                placeholder="0"
                 label="Wunsch Einkommen Rente"
                 value="0"
             ></lightning-input>
@@ -15,18 +19,28 @@
                 type="number"
                 variant="standard"
                 name="name"
+                onchange={moreIncomingChanged}
+                onclick={clearInput}
+                onfocus={clearInput}
                 formatter="currency"
+                placeholder="0"
                 label="Weiteres Einkommen im Alter"
                 value="0"
             ></lightning-input>
-            <div>
+            <div class="format-number">
                 <div>Gesetztl. Altersrente (mtl.)</div>
                 <lightning-formatted-number
-                    class="out-number green"
-                    value="2000"
                     format-style="currency"
+                    class="ml08"
+                    value={rente}
                 ></lightning-formatted-number>
             </div>
+            <div class="hr-line w75"></div>
+            <lightning-formatted-number
+                class="red big-text"
+                value={difference}
+                format-style="currency"
+            ></lightning-formatted-number>
             <div>
                 <lightning-input
                     class="w75"
@@ -34,21 +48,27 @@
                     variant="standard"
                     name="name"
                     formatter="currency"
+                    onchange={possibleSavingChanged}
+                    onclick={clearInput}
+                    placeholder="0"
+                    onfocus={clearInput}
                     label="Möglicher Sparbetrag"
                     value="0"
                 ></lightning-input>
                 <lightning-slider
+                    onchange={yearChanged}
                     label="Jahre"
                     step="1"
                     min="1"
                     max="99"
+                    value="1"
                 ></lightning-slider>
             </div>
-            <div class="hr-line"></div>
+            <div class="hr-line out-line"></div>
             <div class="out-field-container">
                 <lightning-formatted-number
-                    class="out-number green"
-                    value="2000"
+                    class="out-number big-text"
+                    value={outNumber}
                     format-style="currency"
                 ></lightning-formatted-number>
             </div>

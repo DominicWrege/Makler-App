@@ -1,13 +1,42 @@
 .hr-line {
     width: 100%;
-    margin-top: 0.8rem;
     border-top: 3px double black;
-}
-lightning-formatted-number {
-    font-size: 1.4em;
-    margin-top: 0.2rem;
 }
 .out-field-container {
     display: flex;
     justify-content: flex-end;
+}
+
+.out-line {
+    margin-top: 1.25em !important;
+}
+
+.mt1 {
+    margin-top: 1rem;
+}
+.ml08 {
+    margin-left: 0.8em;
+}
+
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+
+.big-text {
+    font-size: 1.4em;
+    margin-top: 0.2rem;
+}
+
+.w75 {
+    width: 70%;
+    min-width: 100px;
+}
+.hr-line,
+lightning-input,
+.format-number,
+lightning-slider {
+    margin-top: 0.6rem;
 }

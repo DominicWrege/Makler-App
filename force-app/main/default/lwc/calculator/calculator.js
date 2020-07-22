@@ -1,6 +1,8 @@
-import { LightningElement, track } from "lwc";
+import { LightningElement, track, wire } from "lwc";
 import { loadScript } from "lightning/platformResourceLoader";
 import Chartjs from "@salesforce/resourceUrl/Chartjs";
+import { fireEvent } from "c/pubsub";
+import { CurrentPageReference } from "lightning/navigation";
 
 const CHART_CONFIG = {
     type: "pie",
@@ -27,7 +29,8 @@ class Expenses {
 
 export default class Calculator extends LightningElement {
     chart = null;
-
+    @wire(CurrentPageReference)
+    pageRef;
     income = 0;
     @track expensesElements = [new Expenses("Miete/Haus", 0)];
     @track outNumber = 0;
@@ -61,19 +64,21 @@ export default class Calculator extends LightningElement {
             e.target.value = null;
         }
     }
-    incomeChange(e) {
-        this.income = e.target.value;
+    incomeChanged(e) {
+        this.income = parseInt(e.target.value, 10);
+        fireEvent(this.pageRef, "incomeChanged", this.income);
         this.calc();
     }
-    addNewExpenseField(e) {
+    addNewExpenseField() {
         const input = this.template.querySelector(
             "lightning-input.add-new-expense"
         );
-        this.expensesElements.push(
-            new Expenses("Weitere Ausgaben", input.value)
-        );
-        this.calc();
-        input.value = 0;
+        if (input.value && input.value > 0) {
+            this.expensesElements.push(
+                new Expenses("Weitere Ausgaben", input.value)
+            );
+            input.value = 0;
+        }
     }
     calc() {
         let sumExpenses = 0;
@@ -85,14 +90,10 @@ export default class Calculator extends LightningElement {
         this.outNumber = this.income - sumExpenses;
 
         const outNumberElement = this.template.querySelector(".out-number");
-        try {
-            if (this.outNumber >= 0) {
-                outNumberElement.style.color = "green";
-            } else {
-                outNumberElement.style.color = "red";
-            }
-        } catch (e) {
-            console.log(e);
+        if (this.outNumber >= 0) {
+            outNumberElement.style.color = "green";
+        } else {
+            outNumberElement.style.color = "red";
         }
     }
 }

@@ -1,5 +1,4 @@
 .add-list-actions {
-    margin-top: 0.5rem;
     display: flex;
     align-items: flex-end;
 }
@@ -21,7 +20,14 @@ lightning-formatted-number {
     margin-top: 0.2rem;
 }
 
+.add-list-actions > lightning-input {
+    flex: 1;
+}
+
 .w75 {
     width: 70%;
     min-width: 100px;
+}
+lightning-input {
+    margin-top: 0.6rem;
 }

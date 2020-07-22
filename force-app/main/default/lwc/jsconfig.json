@@ -66,11 +66,11 @@
             "c/teamGoals": [
                 "teamGoals/teamGoals.js"
             ],
-            "c/Calculator": [
-                "Calculator/Calculator.js"
-            ],
             "c/versorgungsluecke": [
                 "versorgungsluecke/versorgungsluecke.js"
+            ],
+            "c/Calculator": [
+                "Calculator/Calculator.js"
             ]
         }
     },
