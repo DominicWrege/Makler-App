@@ -54,7 +54,7 @@ export default class Versorgungsluecke extends LightningElement {
         }
     }
     calcDifference() {
-        this.difference = -this.moreIncoming - this.rente - this.wunschRente;
+        this.difference = this.wunschRente - this.moreIncoming - this.rente;
         this.calcOut();
     }
     caclRente() {
