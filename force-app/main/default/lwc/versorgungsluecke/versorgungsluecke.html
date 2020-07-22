@@ -1,0 +1,57 @@
+<template>
+    <lightning-card class="card" title="Versorgunslücke (Mockup)">
+        <div class="slds-m-around_medium">
+            <lightning-input
+                class="w75"
+                type="number"
+                variant="standard"
+                name="name"
+                formatter="currency"
+                label="Wunsch Einkommen Rente"
+                value="0"
+            ></lightning-input>
+            <lightning-input
+                class="w75"
+                type="number"
+                variant="standard"
+                name="name"
+                formatter="currency"
+                label="Weiteres Einkommen im Alter"
+                value="0"
+            ></lightning-input>
+            <div>
+                <div>Gesetztl. Altersrente (mtl.)</div>
+                <lightning-formatted-number
+                    class="out-number green"
+                    value="2000"
+                    format-style="currency"
+                ></lightning-formatted-number>
+            </div>
+            <div>
+                <lightning-input
+                    class="w75"
+                    type="number"
+                    variant="standard"
+                    name="name"
+                    formatter="currency"
+                    label="Möglicher Sparbetrag"
+                    value="0"
+                ></lightning-input>
+                <lightning-slider
+                    label="Jahre"
+                    step="1"
+                    min="1"
+                    max="99"
+                ></lightning-slider>
+            </div>
+            <div class="hr-line"></div>
+            <div class="out-field-container">
+                <lightning-formatted-number
+                    class="out-number green"
+                    value="2000"
+                    format-style="currency"
+                ></lightning-formatted-number>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -18,6 +18,9 @@
             "c/account_insuranceData": [
                 "account_insuranceData/account_insuranceData.js"
             ],
+            "c/calculator": [
+                "calculator/calculator.js"
+            ],
             "c/calenderEventItem": [
                 "calenderEventItem/calenderEventItem.js"
             ],
@@ -62,6 +65,12 @@
             ],
             "c/teamGoals": [
                 "teamGoals/teamGoals.js"
+            ],
+            "c/Calculator": [
+                "Calculator/Calculator.js"
+            ],
+            "c/versorgungsluecke": [
+                "versorgungsluecke/versorgungsluecke.js"
             ]
         }
     },

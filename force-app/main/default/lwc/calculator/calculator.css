@@ -1,0 +1,27 @@
+.add-list-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: flex-end;
+}
+.add-new-expense {
+    margin-right: 0.6rem;
+}
+.hr-line {
+    width: 100%;
+    margin-top: 0.8rem;
+    border-top: 3px double black;
+}
+.out-field-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+lightning-formatted-number {
+    font-size: 1.4em;
+    margin-top: 0.2rem;
+}
+
+.w75 {
+    width: 70%;
+    min-width: 100px;
+}

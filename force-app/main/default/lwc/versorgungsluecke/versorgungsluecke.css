@@ -1,0 +1,13 @@
+.hr-line {
+    width: 100%;
+    margin-top: 0.8rem;
+    border-top: 3px double black;
+}
+lightning-formatted-number {
+    font-size: 1.4em;
+    margin-top: 0.2rem;
+}
+.out-field-container {
+    display: flex;
+    justify-content: flex-end;
+}
