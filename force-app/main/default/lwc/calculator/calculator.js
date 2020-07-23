@@ -35,29 +35,29 @@ export default class Calculator extends LightningElement {
     @track expensesElements = [new Expenses("Miete/Haus", 0)];
     @track outNumber = 0;
 
-    initChart() {
-        try {
-            // console.log(CHART_CONFIG);
-            // CHART_CONFIG.data.datasets[0].data[0] = this.einkommen;
-            // CHART_CONFIG.data.datasets[0].data[1] = this.ausgaben;
-            // const crtx = this.template
-            //     .querySelector("canvas.chart")
-            //     .getContext("2d");
-            // this.chart = new Chart(crtx, CHART_CONFIG);
-            // console.log(this.chart);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async renderedCallback() {
-        // await loadScript(this, Chartjs);
-        // try {
-        //     this.initChart();
-        //     this.initChart();
-        // } catch (err) {
-        //     console.log(err);
-        // }
-    }
+    // initChart() {
+    //     try {
+    //         // console.log(CHART_CONFIG);
+    //         // CHART_CONFIG.data.datasets[0].data[0] = this.einkommen;
+    //         // CHART_CONFIG.data.datasets[0].data[1] = this.ausgaben;
+    //         // const crtx = this.template
+    //         //     .querySelector("canvas.chart")
+    //         //     .getContext("2d");
+    //         // this.chart = new Chart(crtx, CHART_CONFIG);
+    //         // console.log(this.chart);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+    // async renderedCallback() {
+    //     // await loadScript(this, Chartjs);
+    //     // try {
+    //     //     this.initChart();
+    //     //     this.initChart();
+    //     // } catch (err) {
+    //     //     console.log(err);
+    //     // }
+    // }
 
     clearInput(e) {
         if (e.target.value == "0") {

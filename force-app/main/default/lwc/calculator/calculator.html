@@ -1,5 +1,9 @@
 <template>
-    <lightning-card class="card" title="Investitionshorizont">
+    <lightning-card
+        class="card"
+        title="Investitionshorizont"
+        icon-name="standard:formula"
+    >
         <div class="slds-m-around_medium">
             <!-- <p class="load-chart" onclick={initChart}>Nur zum testen</p>
             <canvas class="chart" width="400" height="400"></canvas> -->
@@ -57,8 +61,9 @@
             <div>
                 <div class="hr-line"></div>
                 <div class="out-field-container">
+                    <p class="big-text label">Verfügbarer Betrag</p>
                     <lightning-formatted-number
-                        class="out-number"
+                        class="out-number big-text"
                         value={outNumber}
                         format-style="currency"
                     ></lightning-formatted-number>

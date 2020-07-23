@@ -4,7 +4,7 @@
 }
 .out-field-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .out-line {
@@ -23,6 +23,10 @@
 }
 .red {
     color: red;
+}
+
+.label {
+    margin-right: 1em;
 }
 
 .big-text {

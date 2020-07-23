@@ -1,5 +1,9 @@
 <template>
-    <lightning-card class="card" title="Versorgunslücke">
+    <lightning-card
+        class="card"
+        title="Versorgunslücke"
+        icon-name="standard:formula"
+    >
         <div class="slds-m-around_medium">
             <lightning-input
                 class="w75"
@@ -36,6 +40,7 @@
                 ></lightning-formatted-number>
             </div>
             <div class="hr-line w75"></div>
+
             <lightning-formatted-number
                 class="red big-text"
                 value={difference}
@@ -66,6 +71,7 @@
             </div>
             <div class="hr-line out-line"></div>
             <div class="out-field-container">
+                <p class="big-text label">Versorgungslücke</p>
                 <lightning-formatted-number
                     class="out-number big-text"
                     value={outNumber}
