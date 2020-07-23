@@ -65,7 +65,12 @@ export default class Calculator extends LightningElement {
         }
     }
     incomeChanged(e) {
-        this.income = parseInt(e.target.value, 10);
+        if (e.target.value !== "" && e.target.value != NaN) {
+            this.income = parseInt(e.target.value, 10);
+        } else {
+            this.income = 0;
+        }
+
         fireEvent(this.pageRef, "incomeChanged", this.income);
         this.calc();
     }
