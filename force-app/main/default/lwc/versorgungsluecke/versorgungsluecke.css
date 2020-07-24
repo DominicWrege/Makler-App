@@ -4,7 +4,9 @@
 }
 .out-field-container {
     display: flex;
-    justify-content: space-between;
+}
+.flex {
+    display: flex;
 }
 
 .out-line {
@@ -18,24 +20,17 @@
     margin-left: 0.8em;
 }
 
-.green {
-    color: green;
-}
-.red {
-    color: red;
-}
-
 .label {
-    margin-right: 1em;
+    margin-right: 0.5em;
 }
 
 .big-text {
-    font-size: 1.4em;
+    font-size: 1.2em;
     margin-top: 0.2rem;
 }
 
-.w75 {
-    width: 70%;
+.width {
+    width: 65%;
     min-width: 100px;
 }
 .hr-line,
@@ -43,4 +38,14 @@ lightning-input,
 .format-number,
 lightning-slider {
     margin-top: 0.6rem;
+}
+.slider {
+    width: 70%;
+}
+
+@media (max-width: 600px) {
+    .slider,
+    .width {
+        width: 100%;
+    }
 }

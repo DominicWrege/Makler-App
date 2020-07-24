@@ -5,10 +5,8 @@
         icon-name="standard:formula"
     >
         <div class="slds-m-around_medium">
-            <!-- <p class="load-chart" onclick={initChart}>Nur zum testen</p>
-            <canvas class="chart" width="400" height="400"></canvas> -->
             <lightning-input
-                class="w75"
+                class="width"
                 type="number"
                 variant="standard"
                 name="name"
@@ -20,31 +18,30 @@
                 placeholder="0"
                 value="0"
             ></lightning-input>
-            <div class="container-expenses w75">
+            <div class="container-expenses width">
                 <template for:each={expensesElements} for:item="item">
                     <lightning-input
                         key={item.key}
                         type="number"
                         variant="standard"
-                        name="name"
+                        name={item.key}
                         formatter="currency"
                         class="expenses"
                         onfocus={clearInput}
                         onclick={clearInput}
-                        onchange={calc}
+                        onchange={updateExpenses}
                         label={item.label}
                         value={item.value}
                         placeholder="0"
                     ></lightning-input>
                 </template>
             </div>
-            <div class="add-list-actions w75">
+            <div class="add-list-actions width">
                 <lightning-input
                     type="number"
                     variant="standard"
                     name="name"
                     formatter="currency"
-                    onchange={calc}
                     onclick={clearInput}
                     onfocus={clearInput}
                     class="expenses add-new-expense"
@@ -59,16 +56,17 @@
                 ></lightning-button-icon>
             </div>
             <div>
-                <div class="hr-line"></div>
-                <div class="out-field-container">
-                    <p class="big-text label">Verfügbarer Betrag</p>
+                <div class="hr-line width"></div>
+                <div class="out-field-container width">
+                    <p class="label">Verfügbarer Betrag:</p>
                     <lightning-formatted-number
-                        class="out-number big-text"
-                        value={outNumber}
+                        class="out-number"
+                        value={verfuegbar}
                         format-style="currency"
                     ></lightning-formatted-number>
                 </div>
             </div>
+            <canvas class="chart"></canvas>
         </div>
     </lightning-card>
 </template>

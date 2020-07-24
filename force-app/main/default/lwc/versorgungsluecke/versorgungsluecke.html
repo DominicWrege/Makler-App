@@ -6,7 +6,7 @@
     >
         <div class="slds-m-around_medium">
             <lightning-input
-                class="w75"
+                class="width"
                 type="number"
                 variant="standard"
                 name="name"
@@ -19,7 +19,7 @@
                 value="0"
             ></lightning-input>
             <lightning-input
-                class="w75"
+                class="width"
                 type="number"
                 variant="standard"
                 name="name"
@@ -39,16 +39,18 @@
                     value={rente}
                 ></lightning-formatted-number>
             </div>
-            <div class="hr-line w75"></div>
-
-            <lightning-formatted-number
-                class="red big-text"
-                value={difference}
-                format-style="currency"
-            ></lightning-formatted-number>
+            <div class="hr-line width"></div>
+            <div class="out-field-container">
+                <p class="big-text label">Versorgungslücke:</p>
+                <lightning-formatted-number
+                    class="big-text diff-out"
+                    value={versorgungsluecke}
+                    format-style="currency"
+                ></lightning-formatted-number>
+            </div>
             <div>
                 <lightning-input
-                    class="w75"
+                    class="width"
                     type="number"
                     variant="standard"
                     name="name"
@@ -60,21 +62,23 @@
                     label="Möglicher Sparbetrag"
                     value="0"
                 ></lightning-input>
-                <lightning-slider
-                    onchange={yearChanged}
-                    label="Jahre"
-                    step="1"
-                    min="1"
-                    max="99"
-                    value="1"
-                ></lightning-slider>
+                <div class="slider">
+                    <lightning-slider
+                        onchange={yearChanged}
+                        label="Jahre"
+                        step="1"
+                        min="1"
+                        max="99"
+                        value="1"
+                    ></lightning-slider>
+                </div>
             </div>
-            <div class="hr-line out-line"></div>
+            <div class="hr-line out-line width"></div>
             <div class="out-field-container">
-                <p class="big-text label">Versorgungslücke</p>
+                <p class="big-text label">Versorgung:</p>
                 <lightning-formatted-number
-                    class="out-number big-text"
-                    value={outNumber}
+                    class="out-number versorgung big-text"
+                    value={versorgung}
                     format-style="currency"
                 ></lightning-formatted-number>
             </div>

@@ -9,10 +9,10 @@ export default class Versorgungsluecke extends LightningElement {
     @track rente = 0;
     @track wunschRente = 0;
     @track moreIncoming = 0;
-    @track difference = 0;
+    @track versorgungsluecke = 0;
     year = 1;
     @track possibleSaving = 0;
-    @track outNumber = 0;
+    @track versorgung = 0;
     connectedCallback() {
         registerListener("incomeChanged", this.handleChange, this);
     }
@@ -25,11 +25,11 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.possibleSaving = 0;
         }
-        this.calcOut();
+        this.calcVersorgung();
     }
     yearChanged(e) {
         this.year = parseInt(e.target.value, 10);
-        this.calcOut();
+        this.calcVersorgung();
     }
     wunschRenteChanged(e) {
         if (e.target.value !== "") {
@@ -37,7 +37,7 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.wunschRente = 0;
         }
-        this.calcDifference();
+        this.calcVersoungsluecke();
     }
 
     moreIncomingChanged(e) {
@@ -46,39 +46,45 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.moreIncoming = 0;
         }
-        this.calcDifference();
+        this.calcVersoungsluecke();
     }
     clearInput(e) {
         if (e.target.value == "0") {
             e.target.value = null;
         }
     }
-    calcDifference() {
-        this.difference = this.wunschRente - this.moreIncoming - this.rente;
-        this.calcOut();
+    calcVersoungsluecke() {
+        this.versorgungsluecke =
+            this.wunschRente - this.moreIncoming - this.rente;
+        this.calcVersorgung();
     }
+
+    colorNumber(selector, value) {
+        const element = this.template.querySelector(selector);
+        if (value > 0) {
+            element.style = "green";
+        } else if (value < 0) {
+            element.style = "red";
+        } else {
+            element.style = "black";
+        }
+    }
+
     caclRente() {
         this.rente = this.incoming * 0.3781;
-        this.calcDifference();
+        this.calcVersoungsluecke();
     }
     handleChange(val) {
         this.incoming = val;
         this.caclRente();
-        this.calcDifference();
+        this.calcVersoungsluecke();
     }
-    calcOut() {
-        const v1 = 1.0237;
-        const v2 = 0.0237;
-        this.outNumber =
-            this.difference +
-            (this.possibleSaving + v1 * (Math.pow(v1, this.year - 1) / v2));
-
-        const outNumberElement = this.template.querySelector(".out-number");
-
-        if (this.outNumber >= 0) {
-            outNumberElement.style.color = "green";
-        } else {
-            outNumberElement.style.color = "red";
-        }
+    calcVersorgung() {
+        const x =
+            this.possibleSaving *
+            1.0237 *
+            (Math.pow(1.0237, this.year) - 1 / 0.0237);
+        this.versorgung = this.versorgungsluecke - x;
+        this.colorNumber(".versorgung", this.versorgung);
     }
 }
