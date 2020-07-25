@@ -19,16 +19,15 @@ export default class Versorgungsluecke extends LightningElement {
     initChart() {
         try {
             Chart.defaults.global.defaultFontSize = 14;
-            const crtx = this.template
-                .querySelector("canvas.chart-versorg")
-                .getContext("2d");
+            let canvas = this.template.querySelector("canvas.chart-versorg");
+
             if (window.innerWidth > 500) {
-                crtx.height = 180;
+                canvas.height = 180;
             } else {
-                crtx.height = 280;
+                canvas.height = 315;
             }
             this.chart = new Chart(
-                crtx,
+                canvas,
                 configureBar(
                     [
                         {

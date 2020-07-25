@@ -57,6 +57,9 @@
             "c/service_policyData": [
                 "service_policyData/service_policyData.js"
             ],
+            "c/shared": [
+                "shared/shared.js"
+            ],
             "c/taskItem": [
                 "taskItem/taskItem.js"
             ],
@@ -71,9 +74,6 @@
             ],
             "c/Calculator": [
                 "Calculator/Calculator.js"
-            ],
-            "c/shared": [
-                "shared/shared.js"
             ]
         }
     },

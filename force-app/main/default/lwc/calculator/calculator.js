@@ -26,18 +26,15 @@ export default class Calculator extends LightningElement {
     initChart() {
         try {
             Chart.defaults.global.defaultFontSize = 14;
-            const crtx = this.template
-                .querySelector("canvas.chart-calc")
-                .getContext("2d");
-
-            const miete = this.expensesElements[0];
+            const canvas = this.template.querySelector("canvas.chart-calc");
             if (window.innerWidth > 500) {
-                crtx.height = 180;
+                canvas.height = 180;
             } else {
-                crtx.height = 280;
+                canvas.height = 295;
             }
+            const miete = this.expensesElements[0];
             this.chart = new Chart(
-                crtx,
+                canvas,
                 configureBar(
                     [
                         this.newDataset(
