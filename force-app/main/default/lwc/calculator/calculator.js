@@ -5,18 +5,15 @@ import { loadScript } from "lightning/platformResourceLoader";
 import Chartjs from "@salesforce/resourceUrl/Chartjs";
 
 class Expenses {
-    constructor(label, value, key) {
+    static _id = 1;
+    constructor(label, value) {
         this.label = label;
         this.value = value;
-        if (key) {
-            this.key = key;
-        } else {
-            this.key = Expenses.genKey();
-        }
+        this.key = Expenses._id + 1;
     }
-    static genKey() {
-        return Math.floor(Math.random() * 100000 + 5, 2);
-    }
+    // genKey() {
+    //     return Math.floor(Math.random() * 100000 + 5, 2);
+    // }
 }
 
 export default class Calculator extends LightningElement {
@@ -24,20 +21,32 @@ export default class Calculator extends LightningElement {
     pageRef;
     income = 0;
     rendered = false;
-    @track expensesElements = [new Expenses("Miete/Haus", 0, 1)];
+    legendSuffix = 97;
+    @track expensesElements = [new Expenses("Miete/Haus", 0)];
     @track verfuegbar = 0;
     chart = null;
     initChart() {
         try {
             Chart.defaults.global.defaultFontSize = 14;
             const crtx = this.template.querySelector("canvas.chart");
-
+            const miete = this.expensesElements[0];
             if (window.innerWidth > 500) {
                 crtx.height = 180;
             } else {
                 crtx.height = 280;
             }
-            this.chart = new Chart(crtx, Calculator.getBar());
+            this.chart = new Chart(
+                crtx,
+                Calculator.configureBar([
+                    this.newDataset(
+                        miete.value,
+                        miete.key,
+                        miete.label,
+                        "coral"
+                    ),
+                    this.newDataset(0, -1, "Nettoeinkommen", "#5679C0")
+                ])
+            );
         } catch (e) {
             //console.log(e);
         }
@@ -76,7 +85,8 @@ export default class Calculator extends LightningElement {
         );
         if (input.value && input.value > 0) {
             const number = parseInt(input.value, 10);
-            const expense = new Expenses("Weitere Ausgaben", input.value);
+            const label = `Ausgabe ${String.fromCharCode(this.legendSuffix)}`;
+            const expense = new Expenses(label, input.value);
             this.expensesElements.push(expense);
             input.value = 0;
 
@@ -87,23 +97,32 @@ export default class Calculator extends LightningElement {
                 this.updateIncommingBar(0);
             }
 
-            this.unshiftDataSet(number, expense.key, "Ausgabe");
+            const data = this.newDataset(number, expense.key, label);
+
+            this.legendSuffix += 1;
+            if (this.legendSuffix > 122) {
+                this.legendSuffix = 65;
+            }
+            this.chart.data.datasets.unshift(data);
             this.chart.update();
         }
     }
-
-    unshiftDataSet(value, key, label) {
-        this.chart.data.datasets.unshift({
+    newDataset(value, key, label, color) {
+        let c = Calculator.getRandomColor();
+        if (color) {
+            c = color;
+        }
+        return {
             label: label,
-            backgroundColor: [Calculator.getRandomColor()],
+            backgroundColor: [c],
             data: [value],
             key: key,
             maxBarThickness: 120
-        });
+        };
     }
 
     updateExpenses(e) {
-        if (e && e.target.value != "" && e.target.name) {
+        if (e.target.value != "" && e.target.name) {
             const eventKey = e.target.name;
             const newNumber = parseInt(e.target.value, 10);
             for (let x of this.expensesElements) {
@@ -135,7 +154,6 @@ export default class Calculator extends LightningElement {
         } else {
             this.updateIncommingBar(0);
         }
-        console.log("ss", this.verfuegbar);
         this.chart.update();
     }
     updateIncommingBar(value) {
@@ -143,27 +161,15 @@ export default class Calculator extends LightningElement {
         this.chart.data.datasets[end].data[0] = value;
     }
 
-    static getBar() {
+    static configureBar(data) {
+        if (!data) {
+            data = {};
+        }
         return {
             type: "bar",
             data: {
                 labels: [""],
-                datasets: [
-                    {
-                        key: 1,
-                        label: "Miete/Haus",
-                        maxBarThickness: 120,
-                        backgroundColor: ["coral"],
-                        data: [0]
-                    },
-                    {
-                        key: -11,
-                        label: "Nettoeinkommen",
-                        maxBarThickness: 120,
-                        backgroundColor: ["#5679C0"],
-                        data: [0]
-                    }
-                ]
+                datasets: [...data]
             },
             options: {
                 tooltips: false,
