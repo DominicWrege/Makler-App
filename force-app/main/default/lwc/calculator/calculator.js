@@ -3,7 +3,7 @@ import { fireEvent } from "c/pubsub";
 import { CurrentPageReference } from "lightning/navigation";
 import { loadScript } from "lightning/platformResourceLoader";
 import Chartjs from "@salesforce/resourceUrl/Chartjs";
-
+import configureBar from "c/shared";
 class Expenses {
     static _id = 1;
     constructor(label, value) {
@@ -26,7 +26,10 @@ export default class Calculator extends LightningElement {
     initChart() {
         try {
             Chart.defaults.global.defaultFontSize = 14;
-            const crtx = this.template.querySelector("canvas.chart");
+            const crtx = this.template
+                .querySelector("canvas.chart-calc")
+                .getContext("2d");
+
             const miete = this.expensesElements[0];
             if (window.innerWidth > 500) {
                 crtx.height = 180;
@@ -35,15 +38,18 @@ export default class Calculator extends LightningElement {
             }
             this.chart = new Chart(
                 crtx,
-                Calculator.configureBar([
-                    this.newDataset(
-                        miete.value,
-                        miete.key,
-                        miete.label,
-                        "coral"
-                    ),
-                    this.newDataset(0, -1, "Nettoeinkommen", "#5679C0")
-                ])
+                configureBar(
+                    [
+                        this.newDataset(
+                            miete.value,
+                            miete.key,
+                            miete.label,
+                            "coral"
+                        ),
+                        this.newDataset(0, -1, "Nettoeinkommen", "#5679C0")
+                    ],
+                    "Aufgaben"
+                )
             );
         } catch (e) {
             //console.log(e);
@@ -155,46 +161,6 @@ export default class Calculator extends LightningElement {
     updateIncommingBar(value) {
         const end = this.chart.data.datasets.length - 1;
         this.chart.data.datasets[end].data[0] = value;
-    }
-
-    static configureBar(data) {
-        if (!data) {
-            data = {};
-        }
-        return {
-            type: "bar",
-            data: {
-                labels: [""],
-                datasets: [...data]
-            },
-            options: {
-                tooltips: false,
-                title: {
-                    display: false,
-                    text: "Ausgaben"
-                },
-                responsive: true,
-                scales: {
-                    xAxes: [
-                        {
-                            stacked: true,
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ],
-                    yAxes: [
-                        {
-                            ticks: {
-                                display: false,
-                                min: 0
-                            },
-                            stacked: true
-                        }
-                    ]
-                }
-            }
-        };
     }
 
     static getRandomColor() {

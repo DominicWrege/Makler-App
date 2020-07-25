@@ -71,6 +71,9 @@
             ],
             "c/Calculator": [
                 "Calculator/Calculator.js"
+            ],
+            "c/shared": [
+                "shared/shared.js"
             ]
         }
     },
