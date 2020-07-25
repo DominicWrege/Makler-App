@@ -97,7 +97,7 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.wunschRente = 0;
         }
-        this.chnageChartValue(1, this.wunschRente);
+        this.changeChartValue(1, this.wunschRente);
         this.calcVersoungsluecke();
     }
 
@@ -107,7 +107,7 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.moreIncoming = 0;
         }
-        this.chnageChartValue(2, this.wunschRente);
+        this.changeChartValue(2, this.wunschRente);
         this.calcVersoungsluecke();
     }
     clearInput(e) {
@@ -119,15 +119,15 @@ export default class Versorgungsluecke extends LightningElement {
         this.versorgungsluecke =
             this.wunschRente - this.moreIncoming - this.rente;
         if (this.versorgungsluecke < 0) {
-            this.chnageChartValue(0, Math.abs(this.versorgungsluecke));
+            this.changeChartValue(0, Math.abs(this.versorgungsluecke));
         } else {
-            this.chnageChartValue(0, 0);
+            this.changeChartValue(0, 0);
         }
         this.calcVersorgung();
         this.chart.update();
     }
 
-    chnageChartValue(index, value) {
+    changeChartValue(index, value) {
         if (value > 0) {
             this.chart.data.datasets[index].data[0] = value;
         } else {
