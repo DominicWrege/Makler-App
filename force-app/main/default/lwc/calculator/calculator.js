@@ -9,11 +9,9 @@ class Expenses {
     constructor(label, value) {
         this.label = label;
         this.value = value;
-        this.key = Expenses._id + 1;
+        Expenses._id = Expenses._id + 1;
+        this.key = Expenses._id;
     }
-    // genKey() {
-    //     return Math.floor(Math.random() * 100000 + 5, 2);
-    // }
 }
 
 export default class Calculator extends LightningElement {
@@ -86,8 +84,6 @@ export default class Calculator extends LightningElement {
         if (input.value && input.value > 0) {
             const number = parseInt(input.value, 10);
             const label = `Ausgabe ${String.fromCharCode(this.legendSuffix)}`;
-            const expense = new Expenses(label, input.value);
-            this.expensesElements.push(expense);
             input.value = 0;
 
             this.verfuegbar = this.verfuegbar - number;
@@ -96,9 +92,9 @@ export default class Calculator extends LightningElement {
             } else {
                 this.updateIncommingBar(0);
             }
-
+            const expense = new Expenses(label, number);
+            this.expensesElements.push(expense);
             const data = this.newDataset(number, expense.key, label);
-
             this.legendSuffix += 1;
             if (this.legendSuffix > 122) {
                 this.legendSuffix = 65;
@@ -126,14 +122,14 @@ export default class Calculator extends LightningElement {
             const eventKey = e.target.name;
             const newNumber = parseInt(e.target.value, 10);
             for (let x of this.expensesElements) {
-                if (x.key == eventKey) {
+                if (x.key === eventKey) {
                     x.value = newNumber;
                     break;
                 }
             }
 
             for (let i in this.chart.data.datasets) {
-                if (this.chart.data.datasets[i].key == eventKey) {
+                if (this.chart.data.datasets[i].key === eventKey) {
                     this.chart.data.datasets[i].data[0] = newNumber;
                     break;
                 }
