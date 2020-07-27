@@ -23,7 +23,7 @@ export default class Versorgungsluecke extends LightningElement {
             if (window.innerWidth > 500) {
                 canvas.height = 180;
             } else {
-                canvas.height = 320;
+                canvas.height = 325;
             }
             this.chart = new Chart(
                 canvas,
