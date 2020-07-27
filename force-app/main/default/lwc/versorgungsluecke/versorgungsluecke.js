@@ -18,13 +18,12 @@ export default class Versorgungsluecke extends LightningElement {
 
     initChart() {
         try {
-            Chart.defaults.global.defaultFontSize = 14;
             let canvas = this.template.querySelector("canvas.chart-versorg");
 
             if (window.innerWidth > 500) {
                 canvas.height = 180;
             } else {
-                canvas.height = 315;
+                canvas.height = 320;
             }
             this.chart = new Chart(
                 canvas,
@@ -32,19 +31,19 @@ export default class Versorgungsluecke extends LightningElement {
                     [
                         {
                             label: "Versorgungslücke",
-                            backgroundColor: ["#5679C0"],
+                            backgroundColor: ["#ff0000e8"],
                             data: [0],
                             maxBarThickness: 120
                         },
                         {
                             label: "Wunsch Einkommen Rente",
-                            backgroundColor: ["#ff0000e8"],
+                            backgroundColor: ["#5679C0"],
                             data: [0],
                             maxBarThickness: 120
                         },
                         {
                             label: "Weiteres Einkommen im Alter",
-                            backgroundColor: ["#ff0000e8"],
+                            backgroundColor: ["#ffce56"],
                             data: [0],
                             maxBarThickness: 120
                         }

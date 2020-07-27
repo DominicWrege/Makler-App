@@ -1,4 +1,8 @@
 export default function configureBar(data, titel) {
+    if (Chart) {
+        Chart.defaults.global.defaultFontSize = 14;
+        Chart.defaults.global.legend.align = "start";
+    }
     return {
         type: "bar",
         data: {

@@ -25,7 +25,6 @@ export default class Calculator extends LightningElement {
     chart = null;
     initChart() {
         try {
-            Chart.defaults.global.defaultFontSize = 14;
             const canvas = this.template.querySelector("canvas.chart-calc");
             if (window.innerWidth > 500) {
                 canvas.height = 180;
