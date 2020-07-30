@@ -19,7 +19,9 @@
 .label {
     margin-right: 0.5em;
 }
-
+.add-list-actions {
+    margin-top: 1.5em;
+}
 .add-list-actions > lightning-input {
     flex: 1;
 }

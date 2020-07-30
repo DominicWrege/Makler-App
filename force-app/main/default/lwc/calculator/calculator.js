@@ -42,7 +42,12 @@ export default class Calculator extends LightningElement {
                             miete.label,
                             "coral"
                         ),
-                        this.newDataset(0, -1, "Nettoeinkommen", "#5679C0")
+                        this.newDataset(
+                            0,
+                            -1,
+                            "Verfügbarer Betrag",
+                            "#12d40fef"
+                        )
                     ],
                     "Aufgaben"
                 )
