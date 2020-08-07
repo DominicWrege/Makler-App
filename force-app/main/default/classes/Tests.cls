@@ -88,28 +88,32 @@ public class Tests {
         System.assertEquals('Completed', testTask.status);
         System.assertEquals(false, testTask.isdeleted);
 
+
     } 
     
     // Tasks
 
+    // Events
     @isTest (SeeAllData=true) static void testGetTodayEvents(){
-
-        User user = [SELECT Id, name FROM User WHERE id = '0055I000001B4fPQAS'];
-
+        String owner = '0055I000001B4fPQAS';
+        User user = [SELECT Id, name FROM User WHERE id =: owner];
+ 
         System.runAs(user) {
             Test.startTest();
-            Event e = new Event();
-            e.Subject = 'Test Test Event';
-            e.OwnerId='0055I000001B4fPQAS';
-            e.StartDateTime=datetime.now();
-            e.EndDateTime=datetime.now();
+            Event event = new Event();
+            event.Subject = 'Test Test Event 123457';
+            event.OwnerId = owner;
+            event.StartDateTime=datetime.now();
+            event.EndDateTime=datetime.now();
+            insert event;
+            List<Event> testEvents = EventsToday.getTodayEvents(1);
+            System.assertEquals(true, testEvents.size() == 1);
+            System.assertEquals(testEvents.get(0).Subject, 'Test Test Event 123457');
             Test.stopTest();
         }     
 
+        
     }    
-
-    // Events
-
 
 
     // Events
