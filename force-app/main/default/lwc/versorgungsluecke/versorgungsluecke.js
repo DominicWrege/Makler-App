@@ -8,27 +8,13 @@ export default class Versorgungsluecke extends LightningElement {
     @wire(CurrentPageReference)
     pageRef;
     incoming = 0;
-    @track x = 0;
     @track rente = 0;
-    @track wunschRente = 0;
-    @track moreIncoming = 0;
+    wunschRente = 0;
+    moreIncoming = 0;
     @track versorgungsluecke = 0;
     year = 1;
-    @track possibleSaving = 0;
+    possibleSaving = 0;
     @track versorgung = 0;
-
-    get Rente() {
-        return this.rente.toFixed(2);
-    }
-    get Versorgungsluecke() {
-        return this.versorgungsluecke.toFixed(2);
-    }
-    get Versorgung() {
-        return this.versorgung.toFixed(2);
-    }
-    get X() {
-        return this.x.toFixed(2);
-    }
 
     initChart() {
         try {
@@ -168,12 +154,12 @@ export default class Versorgungsluecke extends LightningElement {
         this.calcVersoungsluecke();
     }
     calcVersorgung() {
-        this.x =
-            this.possibleSaving *
-            1.0237 *
-            (Math.pow(1.0237, this.year) - 1 / 0.0237);
-        this.versorgung = this.versorgungsluecke - this.x;
-        // this.colorNumber(".versorgung", this.versorgung);
+        const a = 1 / 0.0237;
+        console.log("a", a);
+        const b =
+            this.possibleSaving * 1.0237 * Math.pow(1.0237, this.year) - a;
+        console.log("b", b);
+        this.versorgung = this.versorgungsluecke - b;
     }
     configureBar(data, titel) {
         if (!data) {
