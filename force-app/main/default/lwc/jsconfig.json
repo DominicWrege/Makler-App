@@ -71,9 +71,6 @@
             ],
             "c/versorgungsluecke": [
                 "versorgungsluecke/versorgungsluecke.js"
-            ],
-            "c/Calculator": [
-                "Calculator/Calculator.js"
             ]
         }
     },
