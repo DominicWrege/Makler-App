@@ -4,6 +4,12 @@ import { CurrentPageReference } from "lightning/navigation";
 import { loadScript } from "lightning/platformResourceLoader";
 import Chartjs from "@salesforce/resourceUrl/Chartjs";
 import configureBar from "c/shared";
+
+const WUNSCH_RENTE_INDEX = 2;
+const RENTE_INDEX = 0;
+const MORE_INCOMING_INDEX = 1;
+const VERSORGUNSLUECKE_INDEX = 3;
+
 export default class Versorgungsluecke extends LightningElement {
     @wire(CurrentPageReference)
     pageRef;
@@ -30,8 +36,14 @@ export default class Versorgungsluecke extends LightningElement {
                 configureBar(
                     [
                         {
-                            label: "Versorgungslücke",
-                            backgroundColor: ["#ff0000e8"],
+                            label: "Rente",
+                            backgroundColor: ["#49d603"],
+                            data: [0],
+                            maxBarThickness: 120
+                        },
+                        {
+                            label: "Weiteres Einkommen im Alter",
+                            backgroundColor: ["#ffce56"],
                             data: [0],
                             maxBarThickness: 120
                         },
@@ -42,8 +54,8 @@ export default class Versorgungsluecke extends LightningElement {
                             maxBarThickness: 120
                         },
                         {
-                            label: "Weiteres Einkommen im Alter",
-                            backgroundColor: ["#ffce56"],
+                            label: "Versorgungslücke",
+                            backgroundColor: ["#ff0000e8"],
                             data: [0],
                             maxBarThickness: 120
                         }
@@ -95,7 +107,7 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.wunschRente = 0;
         }
-        this.changeChartValue(1, this.wunschRente);
+        this.changeChartValue(WUNSCH_RENTE_INDEX, this.wunschRente);
         this.calcVersoungsluecke();
     }
 
@@ -105,7 +117,8 @@ export default class Versorgungsluecke extends LightningElement {
         } else {
             this.moreIncoming = 0;
         }
-        this.changeChartValue(2, this.wunschRente);
+        this.changeChartValue(MORE_INCOMING_INDEX, this.moreIncoming);
+
         this.calcVersoungsluecke();
     }
     clearInput(e) {
@@ -116,11 +129,17 @@ export default class Versorgungsluecke extends LightningElement {
     calcVersoungsluecke() {
         this.versorgungsluecke =
             this.wunschRente - this.moreIncoming - this.rente;
-        if (this.versorgungsluecke < 0) {
-            this.changeChartValue(0, Math.abs(this.versorgungsluecke));
-        } else {
-            this.changeChartValue(0, 0);
-        }
+        //wr Wunschrente Chart
+        const wr =
+            this.wunschRente -
+            (this.rente + this.moreIncoming + Math.abs(this.versorgungsluecke));
+        this.changeChartValue(WUNSCH_RENTE_INDEX, Math.abs(wr));
+        console.log(wr);
+        this.changeChartValue(
+            VERSORGUNSLUECKE_INDEX,
+            Math.abs(this.versorgungsluecke)
+        );
+
         this.calcVersorgung();
         this.chart.update();
     }
@@ -146,6 +165,7 @@ export default class Versorgungsluecke extends LightningElement {
 
     caclRente() {
         this.rente = this.incoming * 0.3781;
+        this.changeChartValue(RENTE_INDEX, this.rente);
         this.calcVersoungsluecke();
     }
     handleChange(val) {
@@ -154,12 +174,9 @@ export default class Versorgungsluecke extends LightningElement {
         this.calcVersoungsluecke();
     }
     calcVersorgung() {
-        const a = 1 / 0.0237;
-        console.log("a", a);
-        const b =
-            this.possibleSaving * 1.0237 * Math.pow(1.0237, this.year) - a;
-        console.log("b", b);
-        this.versorgung = this.versorgungsluecke - b;
+        const x = Math.pow(1.0019, this.year * 12 - 1);
+        const k = (this.possibleSaving * 1.0019 * x) / 0.0019;
+        this.versorgung = k / 12 / 25;
     }
     configureBar(data, titel) {
         if (!data) {
