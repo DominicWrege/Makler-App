@@ -53,3 +53,8 @@ lightning-slider {
 canvas {
     margin-top: 1.5rem;
 }
+
+td {
+    padding: 2px !important;
+    background-origin: 1px solid black !important;
+}
