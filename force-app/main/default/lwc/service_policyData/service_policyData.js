@@ -7,7 +7,7 @@ import getStartOfYear from "@salesforce/apex/InsurancePolicies.getStartOfYear";
 import getEndOfYear from "@salesforce/apex/InsurancePolicies.getEndOfYear";
 
 export default class ServiceResource_policyData extends LightningElement {
-    @api recordId; // genau die setzt sales force für dich gibt auch noch recordName
+    @api recordId;
     @api selectedRecordId;
 
     @track  summedPremiumAmounts;
@@ -23,7 +23,7 @@ export default class ServiceResource_policyData extends LightningElement {
         this.percentNormalized = 50;
         this.insurancePolicies = [];
         this.columns = [
-            { label: "Interner Bezeichner", fieldName: "Name" },
+            { label: "Interner Bezeichner", fieldName: "Id", type: 'url',  typeAttributes: { label: { fieldName: 'Name' } } },
             { label: "Policentyp", fieldName: "PolicyType" },
             {
                 label: "Gebuchte Bruttoprämie",
@@ -41,6 +41,10 @@ export default class ServiceResource_policyData extends LightningElement {
 
     async connectedCallback() {
         await this.fetchData();
+    }
+
+    handleRowSelection(event) {
+        console.log(event)
     }
 
     async fetchData() {

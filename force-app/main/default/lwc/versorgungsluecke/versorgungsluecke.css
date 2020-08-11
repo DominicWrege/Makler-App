@@ -1,0 +1,55 @@
+.hr-line {
+    width: 100%;
+    border-top: 3px double black;
+}
+.out-field-container {
+    display: flex;
+}
+.flex {
+    display: flex;
+}
+
+.out-line {
+    margin-top: 1.25em !important;
+}
+
+.mt1 {
+    margin-top: 1rem;
+}
+.ml08 {
+    margin-left: 0.8em;
+}
+
+.label {
+    margin-right: 0.5em;
+}
+
+.big-text {
+    font-size: 1.2em;
+    margin-top: 0.2rem;
+}
+
+.width {
+    width: 65%;
+    min-width: 100px;
+}
+.hr-line,
+lightning-input,
+.format-number,
+lightning-slider {
+    margin-top: 0.6rem;
+}
+.slider {
+    width: 70%;
+}
+
+@media (max-width: 600px) {
+    .slider,
+    .width {
+        width: 100%;
+    }
+}
+
+canvas {
+    margin-top: 1.5rem;
+}

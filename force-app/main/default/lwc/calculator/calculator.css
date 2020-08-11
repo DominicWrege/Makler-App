@@ -1,0 +1,45 @@
+.add-list-actions {
+    display: flex;
+    align-items: flex-end;
+}
+.add-new-expense {
+    margin-right: 0.6rem;
+}
+.hr-line {
+    width: 100%;
+    margin-top: 0.8rem;
+    border-top: 3px double black;
+}
+.out-field-container {
+    margin-top: 0.2rem;
+    font-size: 1.2em;
+    display: flex;
+}
+
+.label {
+    margin-right: 0.5em;
+}
+.add-list-actions {
+    margin-top: 1.5em;
+}
+.add-list-actions > lightning-input {
+    flex: 1;
+}
+
+.width {
+    width: 65%;
+    min-width: 100px;
+}
+
+@media (max-width: 600px) {
+    .width {
+        width: 100%;
+    }
+}
+lightning-input {
+    margin-top: 0.6rem;
+}
+canvas {
+    /* height: 15rem; */
+    margin-top: 1.5rem;
+}

@@ -11,6 +11,7 @@ export default class SearchField extends LightningElement {
     @api label = "Search";
     @api placholder = "";
     @api foundValue = "";
+    @api itemIcon = "standard:account";
     @api foundId = "";
     @api required = false;
     @api field = SEARCHTYPE_ACCOUNT;

@@ -10,7 +10,7 @@ public with sharing class InsurancePolicies {
 
     @AuraEnabled(cacheable=false)
     public static List<InsurancePolicy>  getInsurancePoliciesForProducer(ID accountID){
-        return [SELECT  GrossWrittenPremium, Name, PolicyType
+        return [SELECT  GrossWrittenPremium, Name, PolicyType, Id
                 FROM InsurancePolicy 
                 WHERE ProducerId =: accountID
                 ];

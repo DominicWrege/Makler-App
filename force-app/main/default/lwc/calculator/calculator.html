@@ -1,0 +1,78 @@
+<template>
+    <lightning-card
+        class="card"
+        title="Investitionshorizont"
+        icon-name="standard:formula"
+    >
+        <div class="slds-m-around_medium">
+            <lightning-input
+                min="0"
+                class="width"
+                type="number"
+                autocomplete="off"
+                variant="standard"
+                name="name"
+                formatter="currency"
+                onfocus={clearInput}
+                onclick={clearInput}
+                onchange={incomeChanged}
+                label="Nettoeinkommen"
+                placeholder="0"
+                value="0"
+            ></lightning-input>
+            <div class="container-expenses width">
+                <template for:each={expensesElements} for:item="item">
+                    <lightning-input
+                        min="0"
+                        key={item.key}
+                        type="number"
+                        autocomplete="off"
+                        variant="standard"
+                        name={item.key}
+                        formatter="currency"
+                        class="expenses"
+                        onfocus={clearInput}
+                        onclick={clearInput}
+                        onchange={updateExpenses}
+                        label={item.label}
+                        value={item.value}
+                        placeholder="0"
+                    ></lightning-input>
+                </template>
+            </div>
+            <div class="add-list-actions width">
+                <lightning-input
+                    min="0"
+                    autocomplete="off"
+                    type="number"
+                    variant="standard"
+                    name="name"
+                    formatter="currency"
+                    onclick={clearInput}
+                    onfocus={clearInput}
+                    class="expenses add-new-expense"
+                    label="Weitere Ausgaben hinzufügen:"
+                    placeholder="0"
+                ></lightning-input>
+                <lightning-button-icon
+                    icon-name="utility:add"
+                    alternative-text="Augaben"
+                    onclick={addNewExpenseField}
+                    title="Weitere Ausgaben hinzufügen"
+                ></lightning-button-icon>
+            </div>
+            <div>
+                <div class="hr-line width"></div>
+                <div class="out-field-container width">
+                    <p class="label">Verfügbarer Betrag:</p>
+                    <lightning-formatted-number
+                        class="out-number"
+                        value={verfuegbar}
+                        format-style="currency"
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+            <canvas class="chart-calc"></canvas>
+        </div>
+    </lightning-card>
+</template>
