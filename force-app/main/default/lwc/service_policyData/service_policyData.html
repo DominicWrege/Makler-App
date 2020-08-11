@@ -4,15 +4,27 @@
         variant="Narrow"
         icon-name="standard:sales_cadence_target"
     >
-        <p class="slds-p-around_x-small">
+        <div class="slds-p-around_x-small">
+            <canvas class="chart-policyData"></canvas>
             <lightning-progress-bar
                 value={percent}
                 size="large"
             ></lightning-progress-bar>
-        </p>
+            <lightning-progress-bar
+                value={percent}
+                size="large"
+            ></lightning-progress-bar>
+            <lightning-progress-bar
+                value={percent}
+                size="large"
+            ></lightning-progress-bar>
+        </div>
         <p class="slds-p-around_x-small">
             <lightning-layout>
-                <lightning-layout-item padding="around-small" class="slds-show_large">
+                <lightning-layout-item
+                    padding="around-small"
+                    class="slds-show_large"
+                >
                     <lightning-formatted-number
                         value={percentNormalized}
                         format-style="percent"

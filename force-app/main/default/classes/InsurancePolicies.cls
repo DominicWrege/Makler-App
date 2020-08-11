@@ -4,7 +4,7 @@ public with sharing class InsurancePolicies {
     public static AggregateResult  getSummedInsurancePoliciesForProducer(ID accountID){
         return [SELECT  SUM(GrossWrittenPremium)
                 FROM InsurancePolicy 
-                WHERE ProducerId =: accountID
+                WHERE (ProducerId =: accountID AND Status =: 'Aktiv')
                 ][0];
     }
 
@@ -12,7 +12,7 @@ public with sharing class InsurancePolicies {
     public static List<InsurancePolicy>  getInsurancePoliciesForProducer(ID accountID){
         return [SELECT  GrossWrittenPremium, Name, PolicyType, Id
                 FROM InsurancePolicy 
-                WHERE ProducerId =: accountID
+                WHERE (ProducerId =: accountID AND Status =: 'Aktiv')
                 ];
     }
 

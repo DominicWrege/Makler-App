@@ -1,0 +1,11 @@
+.slds-progress-bar_large {
+    height: 2rem !important;
+}
+
+.slds-progress-bar--large {
+    height: 2rem !important;
+}
+
+.chart-policyData {
+    margin-bottom: 2rem;
+}

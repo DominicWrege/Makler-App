@@ -4,7 +4,7 @@ public with sharing class TeamManagement {
     public static AggregateResult getSummedInsurancePoliciesForProducer(ID accountID, Date fromDate, Date toDate){
         return [SELECT  SUM(GrossWrittenPremium)
                 FROM InsurancePolicy 
-                WHERE (ProducerId =: accountID AND EffectiveDate >: fromDate AND EffectiveDate <: toDate)
+                WHERE (ProducerId =: accountID AND EffectiveDate >: fromDate AND EffectiveDate <: toDate AND Status =: 'Aktiv')
                 ][0];
     }
 
@@ -41,6 +41,15 @@ public with sharing class TeamManagement {
                 WHERE id =: UserInfo.getUserId()
                 LIMIT 1
                 ];
+    }
+
+    @AuraEnabled(cacheable=false)
+    public static String getUserNameFromId(ID accountID){
+        return [SELECT Name
+                FROM User 
+                WHERE Id =: accountID
+                LIMIT 1
+                ].Name;
     }
 
     @AuraEnabled(cacheable=false)

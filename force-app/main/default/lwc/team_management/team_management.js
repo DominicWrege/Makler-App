@@ -1,6 +1,7 @@
-import { LightningElement, api, track } from "lwc";
+import { LightningElement, track } from "lwc";
 import getTeamUsers from "@salesforce/apex/TeamManagement.getTeamUsers";
 import getCurrentUser from "@salesforce/apex/TeamManagement.getCurrentUser";
+import getUserNameFromId from "@salesforce/apex/TeamManagement.getUserNameFromId";
 import getStartOfYear from "@salesforce/apex/TeamManagement.getStartOfYear";
 import getEndOfYear from "@salesforce/apex/TeamManagement.getEndOfYear";
 import getProducersForUser from "@salesforce/apex/TeamManagement.getProducersForUser";
@@ -14,7 +15,7 @@ import ID_FIELD from "@salesforce/schema/User.Id";
 const COLS = [
     {
         label: "Vollständiger Name",
-        fieldName: "Id",
+        fieldName: "linkName",
         type: "url",
         typeAttributes: { label: { fieldName: "Name" } }
     },
@@ -34,11 +35,10 @@ export default class TeamManagement extends LightningElement {
     @track summed;
     @track gotTeamMember;
     @track busy;
-
+    @track editUser;
     @track draftValues = [];
     @track error;
     @track columns = COLS;
-
 
     constructor() {
         super();
@@ -61,6 +61,9 @@ export default class TeamManagement extends LightningElement {
         this.to = await getEndOfYear();
         this.currentUser = await getCurrentUser();
         this.team = await getTeamUsers();
+        this.team.forEach(function (record) {
+            record.linkName = "/" + record.Id;
+        });
         await this.fetchData();
     }
 
@@ -100,40 +103,67 @@ export default class TeamManagement extends LightningElement {
         fields.Yearly_goal__c = event.detail.draftValues[0].Yearly_goal__c;
 
         const recordInput = { fields };
+        const name = await getUserNameFromId({ accountID: fields.Id });
 
-        updateRecord(recordInput)
-            .then(() => {
+        try {
+            await updateRecord(recordInput);
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Zielaktualisierung erfolgreich!",
+                    message: "Ziele für Benutzer " + name + " aktualisiert.",
+                    variant: "success",
+                    duration: 5000
+                })
+            );
+            this.draftValues = [];
+            
+        } catch (error) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Zielaktualisierung nicht erfolgreich!",
+                    message: error.body.message,
+                    variant: "error",
+                    duration: 5000
+                })
+            );
+        }
+        refreshApex(this.user);
+        this.currentUser = await getCurrentUser();
+        this.team = await getTeamUsers();
+        this.team.forEach(function (record) {
+            record.linkName = "/" + record.Id;
+        });
+        return this.fetchData();
+    }
+    handleMultipleSave(event) {
+        const recordInputs = event.detail.draftValues.slice().map((draft) => {
+            const fields = Object.assign({}, draft);
+            return { fields };
+        });
+
+        const promises = recordInputs.map((recordInput) =>
+            updateRecord(recordInput)
+        );
+        Promise.all(promises)
+            .then((users) => {
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: "Zielaktualisierung erfolgreich!",
-                        message: "Ziele für Benutzer aktualisiert.",
-                        variant: "success",
-                        duration: 5000
+                        title: "Success",
+                        message: "Änderungen ",
+                        variant: "success"
                     })
                 );
                 // Clear all draft values
                 this.draftValues = [];
-             
 
                 // Display fresh data in the datatable
                 return refreshApex(this.user);
             })
-            .catch(() => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Zielaktualisierung nicht erfolgreich!",
-                        message: "Ziele für Benutzer nicht aktualisiert.",
-                        variant: "error",
-                        duration: 5000
-                    })
-                );
+            .catch((error) => {
+                // Handle error
             });
-
-        this.currentUser = await getCurrentUser();
-        this.team = await getTeamUsers();
-        console.log("TEST");
-        return this.fetchData();
     }
+
     async fetchData() {
         try {
             this.busy = true;
@@ -154,7 +184,6 @@ export default class TeamManagement extends LightningElement {
                 });
                 t.percentageNormalized = t.summed / t.Yearly_goal__c;
                 t.percentage = t.percentageNormalized * 100;
-                console.log(t);
             });
 
             this.busy = false;
