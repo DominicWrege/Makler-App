@@ -36,7 +36,7 @@ export default class Versorgungsluecke extends LightningElement {
                 configureBar(
                     [
                         {
-                            label: "Rente",
+                            label: "Gesetztl. Altersrente",
                             backgroundColor: ["#49d603"],
                             data: [0],
                             maxBarThickness: 120
@@ -134,7 +134,6 @@ export default class Versorgungsluecke extends LightningElement {
             this.wunschRente -
             (this.rente + this.moreIncoming + Math.abs(this.versorgungsluecke));
         this.changeChartValue(WUNSCH_RENTE_INDEX, Math.abs(wr));
-        console.log(wr);
         this.changeChartValue(
             VERSORGUNSLUECKE_INDEX,
             Math.abs(this.versorgungsluecke)
