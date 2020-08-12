@@ -11,38 +11,39 @@ export default class ServiceResource_policyData extends LightningElement {
     @api recordId;
     @api selectedRecordId;
 
+    @track insurancePolicies;
     @track summedPremiumAmounts;
     @track target;
     @track percent;
     @track currentUser;
+    @track columns = [
+        {
+            label: "Interner Bezeichner",
+            fieldName: "linkName",
+            type: "url",
+            typeAttributes: { label: { fieldName: "Name" } }
+        },
+        { label: "Policentyp", fieldName: "PolicyType" },
+        {
+            label: "Gebuchte Bruttoprämie",
+            fieldName: "GrossWrittenPremium",
+            type: "currency"
+        }
+    ];
     constructor() {
         super();
-        this.summedPremiumAmounts = 0;
-        this.target = 10000;
-        this.percent = 50;
-        this.summed = 0;
-        this.percentNormalized = 50;
         this.insurancePolicies = [];
-        this.columns = [
-            {
-                label: "Interner Bezeichner",
-                fieldName: "linkName",
-                type: "url",
-                typeAttributes: { label: { fieldName: "Name" } }
-            },
-            { label: "Policentyp", fieldName: "PolicyType" },
-            {
-                label: "Gebuchte Bruttoprämie",
-                fieldName: "GrossWrittenPremium",
-                type: "currency"
-            }
-        ];
+       
     }
 
     async asyncForEach(array, callback) {
         for (let index = 0; index < array.length; index++) {
             await callback(array[index], index, array);
         }
+    }
+
+    targetSet() {
+        return parseFloat(this.target) > 0;
     }
 
 

@@ -4,6 +4,10 @@
         variant="Narrow"
         icon-name="standard:sales_cadence_target"
     >
+    <template if:false={target}>
+        <p class="slds-p-around_x-small">Noch kein persönliches Ziel definiert.</p>
+    </template>
+    <template if:true={target}>
         <div class="slds-p-around_x-small">
             <canvas class="chart-policyData"></canvas>
             <lightning-progress-bar
@@ -63,5 +67,6 @@
             >
             </lightning-datatable>
         </p>
+    </template>
     </lightning-card>
 </template>

@@ -116,7 +116,6 @@ export default class TeamManagement extends LightningElement {
                 })
             );
             this.draftValues = [];
-            
         } catch (error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -141,26 +140,51 @@ export default class TeamManagement extends LightningElement {
             return { fields };
         });
 
-        const promises = recordInputs.map((recordInput) =>
-            updateRecord(recordInput)
-        );
+        const promises = recordInputs.map(function (recordInput) {
+            return updateRecord(recordInput);
+        });
         Promise.all(promises)
-            .then((users) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Success",
-                        message: "Änderungen ",
-                        variant: "success"
-                    })
-                );
+            .then(async (users) => {
+               const names = users.map(function (user) {
+                    return getUserNameFromId({
+                        accountID: user.id
+                    });
+                
+                });
+                Promise.all(names).then(async (payload) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Ziele erfolgreich aktualisiert",
+                            message:
+                                "Ziele für " + payload.join(', ') + " angepasst.",
+                            variant: "success"
+                        })
+                    );
+                });
+
+             
+
                 // Clear all draft values
                 this.draftValues = [];
 
                 // Display fresh data in the datatable
-                return refreshApex(this.user);
+                refreshApex(this.user);
+                this.currentUser = await getCurrentUser();
+                this.team = await getTeamUsers();
+                this.team.forEach(function (record) {
+                    record.linkName = "/" + record.Id;
+                });
+                return this.fetchData();
             })
             .catch((error) => {
-                // Handle error
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Zielaktualisierung nicht erfolgreich!",
+                        message: error.body.message,
+                        variant: "error",
+                        duration: 5000
+                    })
+                );
             });
     }
 
