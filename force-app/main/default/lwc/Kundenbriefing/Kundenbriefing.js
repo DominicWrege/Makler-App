@@ -1,6 +1,6 @@
 import { LightningElement, api, track, wire } from "lwc";
 
-export default class Test_recordform extends LightningElement {
+export default class Kundenbriefing extends LightningElement {
     @api selectedRecordId;
 
     handleValueSelcted(event) {
