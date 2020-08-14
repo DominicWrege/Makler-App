@@ -1,26 +1,42 @@
 <template>
     <lightning-card
-        title="Zielerreichung"
+        title={title}
         variant="Narrow"
         icon-name="standard:sales_cadence_target"
     >
-        <p class="slds-p-horizontal_small">
+    <template if:false={target}>
+        <p class="slds-p-around_x-small">Noch kein persönliches Ziel definiert.</p>
+    </template>
+    <template if:true={target}>
+        <div class="slds-p-around_x-small">
+            <canvas class="chart-policyData"></canvas>
             <lightning-progress-bar
-                value={percentNormalized}
+                value={percent}
                 size="large"
             ></lightning-progress-bar>
-        </p>
-        <p slot="footer">
+            <lightning-progress-bar
+                value={percent}
+                size="large"
+            ></lightning-progress-bar>
+            <lightning-progress-bar
+                value={percent}
+                size="large"
+            ></lightning-progress-bar>
+        </div>
+        <p class="slds-p-around_x-small">
             <lightning-layout>
-                <lightning-layout-item padding="around-small">
+                <lightning-layout-item
+                    padding="around-small"
+                    class="slds-show_large"
+                >
                     <lightning-formatted-number
-                        value={percent}
+                        value={percentNormalized}
                         format-style="percent"
                     ></lightning-formatted-number>
                 </lightning-layout-item>
                 <lightning-layout-item padding="around-small">
                     <lightning-formatted-number
-                        value={summedPremiumAmounts}
+                        value={summed}
                         format-style="currency"
                         currency-code="EUR"
                         currency-display-as="symbol"
@@ -31,7 +47,7 @@
                         value="von"
                     ></lightning-formatted-text>
                 </lightning-layout-item>
-                    <lightning-layout-item padding="around-small">
+                <lightning-layout-item padding="around-small">
                     <lightning-formatted-number
                         value={target}
                         format-style="currency"
@@ -41,5 +57,16 @@
                 </lightning-layout-item>
             </lightning-layout>
         </p>
+        <p class="slds-p-around_x-small">
+            <lightning-datatable
+                hide-checkbox-column
+                key-field="id"
+                data={insurancePolicies}
+                columns={columns}
+                onrowaction={handleRowSelection}
+            >
+            </lightning-datatable>
+        </p>
+    </template>
     </lightning-card>
 </template>

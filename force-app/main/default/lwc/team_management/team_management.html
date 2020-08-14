@@ -1,0 +1,184 @@
+<template>
+
+    <lightning-card
+        title="Teamverwaltung für den Teamleiter"
+        variant="Narrow"
+        icon-name="standard:sales_cadence_target"
+    >
+        <template if:false={gotTeamMember}>
+            <p class="slds-p-around_x-small">Leider keine Teammitglieder.</p>
+        </template>
+        <template if:true={gotTeamMember}>
+            <lightning-tabset>
+                <lightning-tab label="Ziele überwachen" title="Ziele anzeigen">
+                    <div class="slds-page-header">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div
+                                                class="slds-page-header__name-title"
+                                            >
+                                                <h1>
+                                                    <span
+                                                        >Teamverwaltung für
+                                                        Teamleiter</span
+                                                    >
+                                                    <span
+                                                        class="slds-page-header__title slds-truncate"
+                                                        title="Ziele"
+                                                        >Ziele überwachen</span
+                                                    >
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template for:each={team} for:item="user">
+                        <div class="slds-p-around_medium lgc-bg" key={user.Id}>
+                            <lightning-tile
+                                label={user.Name}
+                                type="media"
+                                href={user.linkName}
+                            >
+                                <lightning-avatar
+                                    slot="media"
+                                    src={user.MediumPhotoUrl}
+                                    fallback-icon-name="standard:person_account"
+                                    alternative-text={user.Name}
+                                >
+                                </lightning-avatar>
+                                <lightning-layout>
+                                    <lightning-layout-item
+                                        size="9"
+                                        large-device-size="6"
+                                    >
+                                        <lightning-formatted-number
+                                            value={user.summed}
+                                            format-style="currency"
+                                            currency-code="EUR"
+                                        >
+                                        </lightning-formatted-number>
+                                        &nbsp;(<lightning-formatted-number
+                                            value={user.percentageNormalized}
+                                            format-style="percent"
+                                        ></lightning-formatted-number
+                                        >)&nbsp;von&nbsp;
+                                        <lightning-formatted-number
+                                            value={user.Yearly_goal__c}
+                                            format-style="currency"
+                                            currency-code="EUR"
+                                        >
+                                        </lightning-formatted-number>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item
+                                        size="3"
+                                        large-device-size="6"
+                                    >
+                                        <lightning-progress-bar
+                                            value={user.percentage}
+                                            size="large"
+                                            variant="circular"
+                                        >
+                                        </lightning-progress-bar>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-tile>
+                        </div>
+                    </template>
+                </lightning-tab>
+                <lightning-tab label="Ziele anpassen">
+                    <div class="slds-page-header">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div
+                                                class="slds-page-header__name-title"
+                                            >
+                                                <h1>
+                                                    <span
+                                                        >Teamverwaltung für
+                                                        Teamleiter</span
+                                                    >
+                                                    <span
+                                                        class="slds-page-header__title slds-truncate"
+                                                        title="Ziele"
+                                                        >Ziele anpassen</span
+                                                    >
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-hide">
+                        <template for:each={team} for:item="user">
+                            <lightning-record-edit-form
+                                record-id={user.Id}
+                                object-api-name="User"
+                                key={user.Id}
+                                class="slds-p-around_x-small"
+                                onsubmit={handleSubmit}
+                            >
+                                <lightning-layout vertical-align="end">
+                                    <lightning-layout-item
+                                        size="1"
+                                        padding="around-small"
+                                    >
+                                        <lightning-avatar
+                                            src={user.MediumPhotoUrl}
+                                        ></lightning-avatar>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item
+                                        flexibility="auto"
+                                        padding="around-small"
+                                    >
+                                        <lightning-output-field
+                                            field-name="Name"
+                                        >
+                                        </lightning-output-field>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item flexibility="auto">
+                                        <lightning-input-field
+                                            field-name="Yearly_goal__c"
+                                        >
+                                        </lightning-input-field>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item
+                                        size="3"
+                                        padding="around-small"
+                                    >
+                                        <lightning-button
+                                            class="slds-m-top_medium"
+                                            variant="brand"
+                                            type="submit"
+                                            name="update"
+                                            label="Update"
+                                        >
+                                        </lightning-button>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-record-edit-form>
+                        </template>
+                    </div>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={team}
+                        columns={columns}
+                        onsave={handleMultipleSave}
+                    >
+                    </lightning-datatable>
+                </lightning-tab>
+            </lightning-tabset>
+        </template>
+    </lightning-card>
+</template>
