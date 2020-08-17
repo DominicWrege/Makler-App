@@ -101,7 +101,7 @@ export default class ServiceResource_policyData extends LightningElement {
             this.end = await getEndOfYear();
             this.target = parseFloat(this.currentUser.Yearly_goal__c);
             const producers = await getProducersForUser();
-            this.title = "Zielerreichung von " + this.currentUser.Name;
+            this.title = "Ziel " + this.currentUser.Name;
 
             await this.asyncForEach(producers, async function (p) {
                 const sum = await getSummedInsurancePoliciesForProducer({

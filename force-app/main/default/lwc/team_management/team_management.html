@@ -1,7 +1,7 @@
 <template>
 
     <lightning-card
-        title="Teamverwaltung für den Teamleiter"
+        title="Teamverwaltung"
         variant="Narrow"
         icon-name="standard:sales_cadence_target"
     >
@@ -55,7 +55,7 @@
                                 </lightning-avatar>
                                 <lightning-layout>
                                     <lightning-layout-item
-                                        size="9"
+                                        size="12"
                                         large-device-size="6"
                                     >
                                         <lightning-formatted-number
@@ -79,6 +79,7 @@
                                     <lightning-layout-item
                                         size="3"
                                         large-device-size="6"
+                                        class="slds-hidden"
                                     >
                                         <lightning-progress-bar
                                             value={user.percentage}
@@ -120,56 +121,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slds-hide">
-                        <template for:each={team} for:item="user">
-                            <lightning-record-edit-form
-                                record-id={user.Id}
-                                object-api-name="User"
-                                key={user.Id}
-                                class="slds-p-around_x-small"
-                                onsubmit={handleSubmit}
-                            >
-                                <lightning-layout vertical-align="end">
-                                    <lightning-layout-item
-                                        size="1"
-                                        padding="around-small"
-                                    >
-                                        <lightning-avatar
-                                            src={user.MediumPhotoUrl}
-                                        ></lightning-avatar>
-                                    </lightning-layout-item>
-                                    <lightning-layout-item
-                                        flexibility="auto"
-                                        padding="around-small"
-                                    >
-                                        <lightning-output-field
-                                            field-name="Name"
-                                        >
-                                        </lightning-output-field>
-                                    </lightning-layout-item>
-                                    <lightning-layout-item flexibility="auto">
-                                        <lightning-input-field
-                                            field-name="Yearly_goal__c"
-                                        >
-                                        </lightning-input-field>
-                                    </lightning-layout-item>
-                                    <lightning-layout-item
-                                        size="3"
-                                        padding="around-small"
-                                    >
-                                        <lightning-button
-                                            class="slds-m-top_medium"
-                                            variant="brand"
-                                            type="submit"
-                                            name="update"
-                                            label="Update"
-                                        >
-                                        </lightning-button>
-                                    </lightning-layout-item>
-                                </lightning-layout>
-                            </lightning-record-edit-form>
-                        </template>
-                    </div>
+                
                     <lightning-datatable
                         key-field="Id"
                         data={team}
