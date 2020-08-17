@@ -3,9 +3,6 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "c/Kundenbriefing": [
-                "Kundenbriefing/Kundenbriefing.js"
-            ],
             "c/account_BaseData": [
                 "account_BaseData/account_BaseData.js"
             ],
@@ -42,6 +39,9 @@
             "c/hostLookupInLwc": [
                 "hostLookupInLwc/hostLookupInLwc.js"
             ],
+            "c/kundenbriefing": [
+                "kundenbriefing/kundenbriefing.js"
+            ],
             "c/lifeEventItem": [
                 "lifeEventItem/lifeEventItem.js"
             ],
@@ -74,6 +74,15 @@
             ],
             "c/versorgungsluecke": [
                 "versorgungsluecke/versorgungsluecke.js"
+            ]
+        },
+        "include": [
+            "**/*",
+            "../../../../.sfdx/typings/lwc/**/*.d.ts"
+        ],
+        "typeAcquisition": {
+            "include": [
+                "jest"
             ]
         }
     },

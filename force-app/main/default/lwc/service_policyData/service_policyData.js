@@ -45,7 +45,6 @@ export default class ServiceResource_policyData extends LightningElement {
         }
     }
 
-
     initChart() {
         try {
             let canvas = this.template.querySelector("canvas.chart-policyData");
@@ -104,9 +103,10 @@ export default class ServiceResource_policyData extends LightningElement {
             this.title = "Ziel " + this.currentUser.Name;
 
             await this.asyncForEach(producers, async function (p) {
-                const sum = await getSummedInsurancePoliciesForProducer({
+                const res = await getSummedInsurancePoliciesForProducer({
                     accountID: p.Id
                 });
+                const sum = res.GrossWrittenPremium;
                 const policies = await getInsurancePoliciesForProducer({
                     accountID: p.Id
                 });
@@ -114,9 +114,11 @@ export default class ServiceResource_policyData extends LightningElement {
                     policies
                 );
 
-                if (sum && !isNaN(sum.expr0))
-                    that.summed =
-                        parseFloat(that.summed) + parseFloat(sum.expr0);
+                if (sum && !isNaN(sum)) {
+                    that.summed = parseFloat(that.summed) + parseFloat(sum);
+                } else {
+                    this.summed = 0;
+                }
             });
             this.percentNormalized = this.summed / this.target;
             this.percent = this.percentNormalized * 100;

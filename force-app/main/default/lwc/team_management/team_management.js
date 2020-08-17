@@ -145,24 +145,23 @@ export default class TeamManagement extends LightningElement {
         });
         Promise.all(promises)
             .then(async (users) => {
-               const names = users.map(function (user) {
+                const names = users.map(function (user) {
                     return getUserNameFromId({
                         accountID: user.id
                     });
-                
                 });
                 Promise.all(names).then(async (payload) => {
                     this.dispatchEvent(
                         new ShowToastEvent({
                             title: "Ziele erfolgreich aktualisiert",
                             message:
-                                "Ziele für " + payload.join(', ') + " angepasst.",
+                                "Ziele für " +
+                                payload.join(", ") +
+                                " angepasst.",
                             variant: "success"
                         })
                     );
                 });
-
-             
 
                 // Clear all draft values
                 this.draftValues = [];
