@@ -2,7 +2,7 @@ public with sharing class InsurancePolicies {
 
     @AuraEnabled(cacheable=false)
     public static AggregateResult  getSummedInsurancePoliciesForProducer(ID accountID){
-        return [SELECT  SUM(GrossWrittenPremium)
+        return [SELECT SUM(GrossWrittenPremium) GrossWrittenPremium
                 FROM InsurancePolicy 
                 WHERE (ProducerId =: accountID AND Status =: 'Aktiv')
                 ][0];
@@ -10,7 +10,7 @@ public with sharing class InsurancePolicies {
 
     @AuraEnabled(cacheable=false)
     public static List<InsurancePolicy>  getInsurancePoliciesForProducer(ID accountID){
-        return [SELECT  GrossWrittenPremium, Name, PolicyType, Id
+        return [SELECT GrossWrittenPremium, Name, PolicyType, Id
                 FROM InsurancePolicy 
                 WHERE (ProducerId =: accountID AND Status =: 'Aktiv')
                 ];

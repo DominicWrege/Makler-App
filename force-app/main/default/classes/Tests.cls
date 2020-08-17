@@ -49,13 +49,43 @@ public class Tests {
 
     // InsurancePolicies
 
-    // @isTest (SeeAllData=true) static void testGetServiceResource(){
-    //     ID id = ID.valueOf('0Hn5I000000CoiFSAS');
-    //     ServiceResource serv = InsurancePolicies.getServiceResource(id);
-    //     System.assertEquals('0Hn5I000000CoiFSAS', serv.id);
-    //     System.assertEquals(true, serv.target__c >= 10);
-    // }
+    @isTest (SeeAllData=true) static void testGetSummedInsurancePoliciesForProducer(){
+        ID id = id.valueOf('0Yx5I000000PDw9SAG');
+        AggregateResult sum = InsurancePolicies.getSummedInsurancePoliciesForProducer(id);
+        System.assertNotEquals(sum.get('GrossWrittenPremium'), 4500);
+    }
+    @isTest (SeeAllData=true) static void testGetInsurancePoliciesForProducer(){
+        ID id = id.valueOf('0Yx5I000000PDw9SAG');
+        List<InsurancePolicy> insurances = InsurancePolicies.getInsurancePoliciesForProducer(id);
+        System.assertEquals(true, insurances.size() > 0);
+        InsurancePolicy insurance = insurances.get(0);
+        System.assertEquals(8550, insurance.GrossWrittenPremium);
+        System.assertEquals('Earthquake', insurance.policyType);
+        System.assertEquals('SG-0211-550', insurance.Name);
 
+    }
+
+    @isTest (SeeAllData=true) static void testGetProducersForUser(){
+
+        User user = [SELECT Id, name FROM User WHERE id = '0055I000001KUrxQAG'];
+
+        System.runAs(user) {
+            List<Producer> producers = InsurancePolicies.getProducersForUser();
+            System.assertEquals(true, producers.size() > 0);
+            Producer producer = producers.get(0);
+            System.assertEquals(user.Name, producer.Name);
+        } 
+    
+    }
+
+    @isTest (SeeAllData=true) static void testGetCurrentUser(){
+        User user = [SELECT Id, name FROM User WHERE id = '0055I000001KUrzQAG'];
+        System.runAs(user) {
+            User expUser = InsurancePolicies.getCurrentUser();
+            System.assertEquals(70000, expUser.Yearly_goal__c);
+            System.assertEquals(user.name, expUser.Name);
+        } 
+    }
 
 
     // InsurancePolicies
