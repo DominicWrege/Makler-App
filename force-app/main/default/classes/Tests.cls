@@ -21,7 +21,7 @@ public class Tests {
     }
     // Seacher
 
-    // LifeEvents
+    // LifeEventsjsconfig.json 
 
     @isTest(SeeAllData=true) static void TestGetContactIdForAccount() {
        ID id = LifeEvents.getContactIdForAccount('0015I000004EgUsQAK');
